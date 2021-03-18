@@ -20,6 +20,10 @@
 		5035DBDC2602AB870033AFCF /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5035DBDB2602AB870033AFCF /* MemoryCache.swift */; };
 		5035DBE72602AF130033AFCF /* GameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5035DBE52602AF130033AFCF /* GameCollectionViewCell.swift */; };
 		5035DBE82602AF130033AFCF /* GameCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5035DBE62602AF130033AFCF /* GameCollectionViewCell.xib */; };
+		5035DBF72603ADA60033AFCF /* GamesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5035DBF62603ADA60033AFCF /* GamesViewController.xib */; };
+		5035DBFD2603B4100033AFCF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5035DBFC2603B4100033AFCF /* GradientView.swift */; };
+		5035DC052603B5A40033AFCF /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5035DC042603B5A40033AFCF /* DetailViewController.xib */; };
+		5035DC0A2603B5CA0033AFCF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5035DC092603B5CA0033AFCF /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +63,10 @@
 		5035DBDB2602AB870033AFCF /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		5035DBE52602AF130033AFCF /* GameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionViewCell.swift; sourceTree = "<group>"; };
 		5035DBE62602AF130033AFCF /* GameCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameCollectionViewCell.xib; sourceTree = "<group>"; };
+		5035DBF62603ADA60033AFCF /* GamesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GamesViewController.xib; sourceTree = "<group>"; };
+		5035DBFC2603B4100033AFCF /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		5035DC042603B5A40033AFCF /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		5035DC092603B5CA0033AFCF /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +207,7 @@
 		5035DBAE260291500033AFCF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				5035DC092603B5CA0033AFCF /* DetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -206,6 +215,7 @@
 		5035DBAF260291590033AFCF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5035DC042603B5A40033AFCF /* DetailViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -242,6 +252,7 @@
 		5035DBB7260291730033AFCF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5035DBF62603ADA60033AFCF /* GamesViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -264,6 +275,7 @@
 		5035DBCA260294C00033AFCF /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				5035DBFB2603B3F20033AFCF /* CustomViews */,
 				5035DBE42602ADFE0033AFCF /* Cells */,
 			);
 			path = Shared;
@@ -317,6 +329,14 @@
 			children = (
 			);
 			path = Extenstions;
+			sourceTree = "<group>";
+		};
+		5035DBFB2603B3F20033AFCF /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				5035DBFC2603B4100033AFCF /* GradientView.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -422,7 +442,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5035DBF72603ADA60033AFCF /* GamesViewController.xib in Resources */,
 				5035DB62260286B60033AFCF /* LaunchScreen.storyboard in Resources */,
+				5035DC052603B5A40033AFCF /* DetailViewController.xib in Resources */,
 				5035DB5F260286B60033AFCF /* Assets.xcassets in Resources */,
 				5035DBE82602AF130033AFCF /* GameCollectionViewCell.xib in Resources */,
 			);
@@ -456,7 +478,9 @@
 				5035DBC3260292C90033AFCF /* FavoritesViewController.swift in Sources */,
 				5035DBDC2602AB870033AFCF /* MemoryCache.swift in Sources */,
 				5035DB56260286B40033AFCF /* AppDelegate.swift in Sources */,
+				5035DC0A2603B5CA0033AFCF /* DetailViewController.swift in Sources */,
 				5035DBD72602AB720033AFCF /* DiskCache.swift in Sources */,
+				5035DBFD2603B4100033AFCF /* GradientView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
