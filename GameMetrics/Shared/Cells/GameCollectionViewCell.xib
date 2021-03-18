@@ -90,6 +90,12 @@
                 <constraint firstAttribute="trailing" secondItem="LKh-jc-RcE" secondAttribute="trailing" id="Sbg-gw-scd"/>
                 <constraint firstItem="LKh-jc-RcE" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="g2I-EJ-XFH"/>
             </constraints>
+            <connections>
+                <outlet property="gameGenresLabel" destination="HNX-aC-P1v" id="M12-vZ-DrD"/>
+                <outlet property="gameImageView" destination="vrl-i8-jeJ" id="gYi-EW-XWz"/>
+                <outlet property="gameScoreLabel" destination="HbC-vr-axl" id="sDU-Zv-Ruj"/>
+                <outlet property="gameTitleLabel" destination="POd-Uk-hWR" id="qjb-SJ-28I"/>
+            </connections>
             <point key="canvasLocation" x="136.95652173913044" y="134.59821428571428"/>
         </collectionViewCell>
     </objects>
