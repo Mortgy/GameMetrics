@@ -15,6 +15,7 @@ class GradientView: UIView {
         layer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
         return layer
     }()
+    
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
@@ -22,6 +23,4 @@ class GradientView: UIView {
         self.backgroundColor = UIColor.clear
         self.layer.addSublayer(gradientLayer)
     }
-    
-
 }
