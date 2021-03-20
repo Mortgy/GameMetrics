@@ -1,0 +1,12 @@
+//
+//  Production.xcconfig
+//  GameMetrics
+//
+//  Created by Mortgy on 3/20/21.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// Production.xcconfig
+API_BASE_URL = api.rawg.io/api/
