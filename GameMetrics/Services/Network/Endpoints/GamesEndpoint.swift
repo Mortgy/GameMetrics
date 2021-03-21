@@ -9,6 +9,7 @@ import Foundation
 import SENetworking
 
 struct GamesRequest: Encodable {
+    let search: String?
     var page: Int = 0
     mutating func addPage() {
         page += 1

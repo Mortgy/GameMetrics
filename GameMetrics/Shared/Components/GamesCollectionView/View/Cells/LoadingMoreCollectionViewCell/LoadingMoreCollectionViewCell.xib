@@ -18,8 +18,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="314" height="100"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qbh-kl-eMg">
-                        <rect key="frame" x="147" y="40" width="20" height="20"/>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="qbh-kl-eMg">
+                        <rect key="frame" x="138.5" y="31.5" width="37" height="37"/>
                         <color key="color" name="subtitle_gray"/>
                     </activityIndicatorView>
                 </subviews>

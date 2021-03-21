@@ -14,7 +14,6 @@ struct APIEndpoints : APIEndpointsProtocol {
 
 protocol APIEndpointsProtocol {
     static func getGames(with GameRequestDTO: GamesRequest) -> Endpoint<GameResponseModel>
-    static func getSearchGames(with GameSearchRequestDTO: GameSearchRequest) -> Endpoint<GameResponseModel>
     static func getGame(with GameDetailRequestDTO: GameDetailsRequest) -> Endpoint<GameDetailsModel>
 }
 
