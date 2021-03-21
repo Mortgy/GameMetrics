@@ -7,20 +7,19 @@
 
 import UIKit
 
-class GamesViewModel: NSObject, ViewModel, GamesRequestProtocol {
+class GamesViewModel: GamesCollectionViewModel, GamesRequestProtocol {
     
     internal var fetchedData = [GameModel]()
-    internal var gamesRequest: GamesRequest = GamesRequest()
+    internal var gamesRequest: GamesRequest = GamesRequest(search: nil)
     internal var loadMore: Bool = false
 
-    var delegate: ViewModelDelegate?
+    var delegate: GamesCollectionViewModelDelegate?
     
-    init(delegate: ViewModelDelegate?) {
+    init(delegate: GamesCollectionViewModelDelegate?) {
         self.delegate = delegate
     }
     
     func fetchData () {
-        
         gamesRequest.addPage()
         let endpoint = APIEndpoints.getGames(with: gamesRequest)
         
@@ -42,7 +41,7 @@ class GamesViewModel: NSObject, ViewModel, GamesRequestProtocol {
         return fetchedData[index] as! T
     }
     
-    func cellViewModelForIndex(index: Int) -> GameCellViewModel {
-        return GameCellViewModel(game: fetchedData[index])
+    func cellViewModelForIndex<T>(index: Int) -> T {
+        return GameCellViewModel(game: fetchedData[index]) as! T
     }
 }

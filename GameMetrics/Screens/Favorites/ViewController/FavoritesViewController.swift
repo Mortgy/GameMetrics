@@ -9,6 +9,8 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
 
+    @IBOutlet weak var favoritesCollectionView: GamesCollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -16,6 +18,7 @@ class FavoritesViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         title = "Favorites"
+        setupCollectionViewModel()
     }
     
 
@@ -29,4 +32,11 @@ class FavoritesViewController: UIViewController {
     }
     */
 
+}
+
+extension FavoritesViewController {
+    func setupCollectionViewModel() {
+        let favoritesViewModel = FavoritesViewModel(delegate: favoritesCollectionView)
+        favoritesCollectionView.setupView(gamesViewModel: favoritesViewModel)
+    }
 }

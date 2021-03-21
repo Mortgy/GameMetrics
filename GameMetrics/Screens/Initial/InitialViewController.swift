@@ -16,13 +16,13 @@ class InitialViewController: UITabBarController {
     }
     
     func createTabBarViewControllers() -> [UIViewController] {
-        let gamesViewController = GamesViewController()
-        gamesViewController.tabBarItem = UITabBarItem(title: "Games", image: UIImage(named: "gamePad"), tag: 0)
+        let homeViewController = HomeViewController()
+        homeViewController.tabBarItem = UITabBarItem(title: "Games", image: UIImage(named: "gamePad"), tag: 0)
         
         let favoritesViewController = FavoritesViewController()
         favoritesViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         
-        let viewControllers = [gamesViewController, favoritesViewController]
+        let viewControllers = [homeViewController, favoritesViewController]
         return viewControllers.map { UINavigationController(rootViewController: $0) }
     }
 
