@@ -9,14 +9,23 @@ import UIKit
 
 extension UIImageView {
     func load(url: URL) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
+        let urlMd5 = url.absoluteString.MD5()
+        
+        if let data: Data = DiskCacheManager().value(urlMd5, from: .images) {
+            self.image = UIImage(data: data)
+        } else {
+            DispatchQueue.global().async { [weak self] in
+                if let data = try? Data(contentsOf: url) {
+                    if let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            self?.image = image
+                            DiskCacheManager().add(data, for: url.absoluteString.MD5(), to: .images)
+                        }
                     }
                 }
             }
         }
+        
     }
 }
+
