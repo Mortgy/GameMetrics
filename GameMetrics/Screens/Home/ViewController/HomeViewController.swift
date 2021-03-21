@@ -10,6 +10,13 @@ import UIKit
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var gamesCollectionView: GamesCollectionView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var infoLabel: UILabel!
+    
+    private var pendingRequestWorkItem: DispatchWorkItem?
+    var gamesViewModel: GamesViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +42,49 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
     func setupCollectionViewModel() {
-        let gamesViewModel = GamesViewModel(delegate: gamesCollectionView)
-        gamesCollectionView.setupView(gamesViewModel: gamesViewModel)
+        gamesViewModel = GamesViewModel(delegate: gamesCollectionView)
+        gamesCollectionView.setupView(gamesViewModel: gamesViewModel!)
+    }
+}
+
+extension HomeViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if let text = searchBar.text, text.count > 3 {
+            activityIndicator.isHidden = true
+            infoLabel.isHidden = true
+            
+            pendingRequestWorkItem?.cancel()
+            
+            let requestWorkItem = DispatchWorkItem { [weak self] in
+                self?.gamesViewModel!.search(keyword: searchBar.text!)
+            }
+            
+            // Save the new work item and execute it after 250 ms
+            pendingRequestWorkItem = requestWorkItem
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250),
+                                          execute: requestWorkItem)
+        } else if let text = searchBar.text, text.count > 0 && text.count <= 3 {
+            pendingRequestWorkItem?.cancel()
+            gamesViewModel?.resetNoFetch()
+            gamesCollectionView.reloadData()
+            activityIndicator.isHidden = false
+            infoLabel.isHidden = false
+        } else {
+            pendingRequestWorkItem?.cancel()
+            gamesViewModel?.reset()
+            activityIndicator.isHidden = true
+            infoLabel.isHidden = true
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        gamesViewModel?.reset()
+        view.endEditing(true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
     }
 }

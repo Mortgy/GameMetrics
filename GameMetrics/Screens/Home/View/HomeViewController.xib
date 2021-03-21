@@ -11,7 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="GameMetrics" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="pV6-wr-KpQ" id="kEC-mJ-efF"/>
                 <outlet property="gamesCollectionView" destination="WHV-fk-Kdh" id="Cwa-dD-OBZ"/>
+                <outlet property="infoLabel" destination="YY3-K5-GtX" id="yKP-nQ-WO3"/>
+                <outlet property="searchBar" destination="oc8-8O-eTl" id="sRP-LU-sG5"/>
                 <outlet property="view" destination="iN0-l3-epB" id="jRO-i1-3V3"/>
             </connections>
         </placeholder>
@@ -20,9 +23,12 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" searchBarStyle="prominent" translatesAutoresizingMaskIntoConstraints="NO" id="oc8-8O-eTl">
+                <searchBar contentMode="redraw" placeholder="Search for the games" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oc8-8O-eTl">
                     <rect key="frame" x="0.0" y="44" width="414" height="56"/>
                     <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="Vag-Ff-MLi"/>
+                    </connections>
                 </searchBar>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="WHV-fk-Kdh" customClass="GamesCollectionView" customModule="GameMetrics" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="100" width="414" height="762"/>
@@ -34,13 +40,13 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No game has been searched." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YY3-K5-GtX">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No game has been searched." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YY3-K5-GtX">
                     <rect key="frame" x="96" y="136" width="222" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="pV6-wr-KpQ">
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="pV6-wr-KpQ">
                     <rect key="frame" x="197" y="438" width="20" height="20"/>
                 </activityIndicatorView>
             </subviews>

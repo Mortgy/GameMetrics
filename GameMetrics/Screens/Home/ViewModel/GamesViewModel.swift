@@ -6,24 +6,46 @@
 //
 
 import UIKit
+import SENetworking
 
 class GamesViewModel: GamesCollectionViewModel, GamesRequestProtocol {
-    
     internal var fetchedData = [GameModel]()
     internal var gamesRequest: GamesRequest = GamesRequest(search: nil)
     internal var loadMore: Bool = false
-
+    var networkRequest: NetworkCancellable?
+    
     var delegate: GamesCollectionViewModelDelegate?
     
     init(delegate: GamesCollectionViewModelDelegate?) {
         self.delegate = delegate
     }
     
+    func search (keyword: String) {
+        networkRequest?.cancel()
+        loadMore = false
+        gamesRequest = GamesRequest(search: keyword)
+        fetchedData = [GameModel]()
+        fetchData()
+    }
+    
+    func resetNoFetch () {
+        loadMore = false
+        gamesRequest = GamesRequest(search: nil)
+        fetchedData = [GameModel]()
+    }
+    
+    func reset () {
+        loadMore = false
+        gamesRequest = GamesRequest(search: nil)
+        fetchedData = [GameModel]()
+        fetchData()
+    }
+    
     func fetchData () {
         gamesRequest.addPage()
         let endpoint = APIEndpoints.getGames(with: gamesRequest)
         
-        DIContainer.shared.apiDataTransferService.request(with: endpoint) { result in
+        networkRequest = DIContainer.shared.apiDataTransferService.request(with: endpoint) { result in
             
             guard case let .success(response) = result, let games = response.results else { return }
             self.fetchedData.append(contentsOf: games)

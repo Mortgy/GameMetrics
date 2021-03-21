@@ -8,6 +8,12 @@
 import UIKit
 
 class FavoritesViewModel: GamesCollectionViewModel {
+    func search(keyword: String) {
+    }
+    
+    func reset() {
+    }
+    
     
     internal var fetchedData = [GameModel]()
     internal var loadMore: Bool = false

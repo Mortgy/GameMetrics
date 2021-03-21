@@ -21,6 +21,10 @@ class FavoritesViewController: UIViewController {
         setupCollectionViewModel()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        favoritesCollectionView.gamesViewModel.fetchData()
+    }
 
     /*
     // MARK: - Navigation
