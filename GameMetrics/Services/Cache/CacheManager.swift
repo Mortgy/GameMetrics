@@ -7,48 +7,15 @@
 
 import Foundation
 
-enum CacheType {
-    case Disk
-    case Memory
+enum CacheLists: String {
+    case seen
+    case favoriteGames
+    case favoriteGameDetails
 }
 
 protocol Cache {
-    func add<T: Codable>(value: T, forKey key: String)
-    func remove(key: String)
-    func value<T: Codable>(forKey key: String) -> T?
+    func add<T: Codable>(_ value: T, for key: String, to list: CacheLists?)
+    func remove(_ key: String, from list: CacheLists?)
+    func value<T: Codable>(_ key: String, from list: CacheLists?) -> T?
+    func valueExists(_ key: String, in list: CacheLists?) -> Bool
 }
-
-class CacheManager: NSObject {
-    
-    func add<T: Codable>(value: T, forKey key: String, cacheType: CacheType) {
-        switch cacheType {
-        case .Disk:
-            DiskCache().add(value: value, forKey: key)
-            break
-        case .Memory:
-            MemoryCache().add(value: value, forKey: key)
-            break
-        }
-    }
-    
-    func remove(key: String, cacheType: CacheType) {
-        switch cacheType {
-        case .Disk:
-            DiskCache().remove(key: key)
-            break
-        case .Memory:
-            MemoryCache().remove(key: key)
-            break
-        }
-    }
-    
-    func value<T: Codable>(forKey key: String, cacheType: CacheType) -> T? {
-        switch cacheType {
-        case .Disk:
-            return DiskCache().value(forKey: key)
-        case .Memory:
-            return MemoryCache().value(forKey: key)
-        }
-    }
-}
-
