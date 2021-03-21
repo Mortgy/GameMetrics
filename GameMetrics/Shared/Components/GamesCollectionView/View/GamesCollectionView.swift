@@ -6,27 +6,20 @@
 //
 
 import UIKit
-class GamesCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ViewModelDelegate {
+class GamesCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, GamesCollectionViewModelDelegate {
     
-    var gamesViewModel: GamesViewModel
+    var gamesViewModel: GamesCollectionViewModel!
     
-    init(gamesViewModel: GamesViewModel) {
+    func setupView(gamesViewModel: GamesCollectionViewModel) {
         self.gamesViewModel = gamesViewModel
-        super.init(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        
         setupUI()
         setupViewModel()
-    }
-    
-    required init?(coder: NSCoder) {
-        self.gamesViewModel = GamesViewModel(delegate: nil)
-        super.init(coder: coder)
-        gamesViewModel.delegate = self
-        setupUI()
-        setupViewModel()
+        registerObservers()
     }
     
     func setupViewModel() {
-        gamesViewModel = GamesViewModel(delegate: self)
+        self.gamesViewModel.delegate = self
         gamesViewModel.fetchData()
     }
     
@@ -61,11 +54,11 @@ extension GamesCollectionView {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if showLoadMoreCell(for: indexPath) {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LoadingMoreCollectionViewCell", for: indexPath) as! LoadingMoreCollectionViewCell            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LoadMoreCell", for: indexPath) as! LoadingMoreCollectionViewCell            
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCell", for: indexPath) as! GameCollectionViewCell
-            let cellViewModel = gamesViewModel.cellViewModelForIndex(index: indexPath.row)
+            let cellViewModel: GameCellViewModel = gamesViewModel.cellViewModelForIndex(index: indexPath.row)
             
             cell.setup(with: cellViewModel)
             
@@ -85,8 +78,12 @@ extension GamesCollectionView {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cellViewModel = gamesViewModel.cellViewModelForIndex(index: indexPath.row)
+        let cellViewModel: GameCellViewModel = gamesViewModel.cellViewModelForIndex(index: indexPath.row)
         cellViewModel.markAsSeen()
+        let game: GameModel = gamesViewModel.itemAtIndex(index: indexPath.row)
+        DiskCacheManager().add(game, for: "\(game.id)", to: .favoriteGames)
+        NotificationCenter.default.post(name: .favoritedItemUpdated, object: nil)
+
     }
 }
 
@@ -113,6 +110,10 @@ extension GamesCollectionView {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if showLoadMoreCell(for: indexPath) {
+            return CGSize(width: collectionView.frame.width, height: 100)
+        }
+        
         return itemSize()
     }
     
@@ -149,11 +150,8 @@ extension GamesCollectionView {
     }
     
     func showLoadMoreCell(for indexPath: IndexPath) -> Bool {
-        if gamesViewModel.loadMore && indexPath.row == gamesViewModel.itemsCount() {
-            return true
-        }
-        
-        return false
+        guard gamesViewModel.loadMore else { return false }
+        return indexPath.row == ( gamesViewModel.itemsCount() - 1 )
     }
     
     func calculateItemHeight(itemWidth: CGFloat) -> CGFloat {
