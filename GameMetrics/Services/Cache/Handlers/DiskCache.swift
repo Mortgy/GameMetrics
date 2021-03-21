@@ -26,7 +26,7 @@ extension DiskCacheManager {
         let path = getCachePath(for: key, in: list?.rawValue)
         
         do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: false)
+            let data = try JSONEncoder().encode(value)
             try data.write(to: URL(string: path)!)
         } catch {
             print(error)
@@ -38,14 +38,14 @@ extension DiskCacheManager {
         
         let path = getCachePath(for: key, in: list?.rawValue)
         
-        guard let data = try? Data(contentsOf: URL(string: path)!), let value = NSKeyedUnarchiver.unarchiveObject(with: data) as? T else {
+        guard let data = try? Data(contentsOf: URL(string: path)!), let value = try? JSONDecoder().decode(T.self, from: data) else {
             return nil
         }
         
         return value
     }
     
-    func values<T>(in list: CacheLists) -> [T] {
+    func values<T>(in list: CacheLists) -> [T] where T: Codable {
         do {
             let path = getCachePath(for: nil, in: list.rawValue)
             
@@ -56,8 +56,7 @@ extension DiskCacheManager {
                 var results = [T]()
                 
                 for url in contentList {
-                    print(url.absoluteString)
-                    if let data = try? Data(contentsOf: url), let value = NSKeyedUnarchiver.unarchiveObject(with: data) as? T {
+                    if let data = try? Data(contentsOf: url), let value = try? JSONDecoder().decode(T.self, from: data) {
                         results.append(value)
                     }
                 }
