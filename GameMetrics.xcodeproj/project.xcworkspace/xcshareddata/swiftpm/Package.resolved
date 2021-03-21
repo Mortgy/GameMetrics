@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SENetworking",
+        "repositoryURL": "https://github.com/kudoleh/SENetworking",
+        "state": {
+          "branch": null,
+          "revision": "269082f42c4b0847ef6c33904822e3dbfc477311",
+          "version": "1.0.7"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
