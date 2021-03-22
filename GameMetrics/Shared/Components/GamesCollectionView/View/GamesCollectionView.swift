@@ -26,7 +26,6 @@ class GamesCollectionView: UICollectionView, UICollectionViewDataSource, UIColle
     
     func registerObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: .seenItemUpdated, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: .favoritedItemUpdated, object: nil)
     }
 }
 

@@ -22,7 +22,7 @@ class GameCoordinator: Coordinator {
     }
     
     func pushGameDetail(game: GameModel) {
-        let detailViewModel = GameDetailsViewModel(game: game)
+        let detailViewModel = DetailsViewModel(game: game)
         
         let detailViewController = DetailViewController(detailViewModel: detailViewModel, game: game)
         navigationController?.pushViewController(detailViewController, animated: true)
