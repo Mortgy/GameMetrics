@@ -8,8 +8,20 @@
 import UIKit
 
 class FavoritesViewController: UIViewController {
+    
+    weak var coordinator: FavoritesCoordinator?
 
     @IBOutlet weak var favoritesCollectionView: GamesCollectionView!
+    var favoritesViewModel: FavoritesViewModel
+
+    init(favoritesViewModel: FavoritesViewModel) {
+        self.favoritesViewModel = favoritesViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +52,16 @@ class FavoritesViewController: UIViewController {
 
 extension FavoritesViewController {
     func setupCollectionViewModel() {
-        let favoritesViewModel = FavoritesViewModel(delegate: favoritesCollectionView)
+        favoritesViewModel.delegate = favoritesCollectionView
         favoritesCollectionView.setupView(gamesViewModel: favoritesViewModel)
+    }
+}
+
+// MARK: - Screen Rotation
+extension FavoritesViewController {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        favoritesCollectionView?.collectionViewLayout.invalidateLayout()
+        favoritesCollectionView?.layoutMargins = .zero
+        favoritesCollectionView?.reloadData()
     }
 }

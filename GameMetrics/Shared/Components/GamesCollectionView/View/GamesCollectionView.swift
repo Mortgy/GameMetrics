@@ -9,6 +9,7 @@ import UIKit
 class GamesCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ViewModelDelegate {
     
     var gamesViewModel: GamesCollectionViewModel!
+    weak var controller: (UIViewController & CoordinatorChild)?
     
     func setupView(gamesViewModel: GamesCollectionViewModel) {
         self.gamesViewModel = gamesViewModel
@@ -81,9 +82,7 @@ extension GamesCollectionView {
         let cellViewModel: GameCellViewModel = gamesViewModel.cellViewModelForIndex(index: indexPath.row)
         cellViewModel.markAsSeen()
         let game: GameModel = gamesViewModel.itemAtIndex(index: indexPath.row)
-        DiskCacheManager().add(game, for: "\(game.id)", to: .favoriteGames)
-        NotificationCenter.default.post(name: .favoritedItemUpdated, object: nil)
-
+        gamesViewModel.coordinator.pushGameDetail(game: game)
     }
 }
 

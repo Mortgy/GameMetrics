@@ -9,6 +9,8 @@ import UIKit
 import SENetworking
 
 class HomeViewModel: GamesCollectionViewModel, GamesRequestProtocol {
+    var coordinator: GameCoordinator
+    
     internal var fetchedData = [GameModel]()
     internal var gamesRequest: GamesRequest = GamesRequest(search: nil)
     internal var loadMore: Bool = false
@@ -16,8 +18,9 @@ class HomeViewModel: GamesCollectionViewModel, GamesRequestProtocol {
     
     var delegate: ViewModelDelegate?
     
-    init(delegate: ViewModelDelegate?) {
+    init(delegate: ViewModelDelegate? = nil, coordinator: GameCoordinator) {
         self.delegate = delegate
+        self.coordinator = coordinator
     }
     
     func search (keyword: String) {

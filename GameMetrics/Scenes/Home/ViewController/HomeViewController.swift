@@ -11,12 +11,21 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var gamesCollectionView: GamesCollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var infoLabel: UILabel!
     
     private var pendingRequestWorkItem: DispatchWorkItem?
-    var gamesViewModel: HomeViewModel?
+    var gamesViewModel: HomeViewModel
+    
+    init(gamesViewModel: HomeViewModel) {
+        self.gamesViewModel = gamesViewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,27 +37,28 @@ class HomeViewController: UIViewController {
         setupCollectionViewModel()
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 
 extension HomeViewController {
     func setupCollectionViewModel() {
-        gamesViewModel = HomeViewModel(delegate: gamesCollectionView)
-        gamesCollectionView.setupView(gamesViewModel: gamesViewModel!)
+        self.gamesViewModel.delegate = gamesCollectionView
+        gamesCollectionView.setupView(gamesViewModel: gamesViewModel)
     }
 }
 
-extension HomeViewController: UISearchBarDelegate {
+// MARK: - Screen Rotation
+extension HomeViewController {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        gamesCollectionView?.collectionViewLayout.invalidateLayout()
+        gamesCollectionView?.layoutMargins = .zero
+        gamesCollectionView?.reloadData()
+    }
+}
 
+// MARK: - SearchBarDelegate
+extension HomeViewController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let text = searchBar.text, text.count > 3 {
             activityIndicator.isHidden = true
@@ -57,22 +67,22 @@ extension HomeViewController: UISearchBarDelegate {
             pendingRequestWorkItem?.cancel()
             
             let requestWorkItem = DispatchWorkItem { [weak self] in
-                self?.gamesViewModel!.search(keyword: searchBar.text!)
+                self?.gamesViewModel.search(keyword: searchBar.text!)
             }
             
             // Save the new work item and execute it after 250 ms
             pendingRequestWorkItem = requestWorkItem
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250),
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(750),
                                           execute: requestWorkItem)
         } else if let text = searchBar.text, text.count > 0 && text.count <= 3 {
             pendingRequestWorkItem?.cancel()
-            gamesViewModel?.resetNoFetch()
+            gamesViewModel.resetNoFetch()
             gamesCollectionView.reloadData()
             activityIndicator.isHidden = false
             infoLabel.isHidden = false
         } else {
             pendingRequestWorkItem?.cancel()
-            gamesViewModel?.reset()
+            gamesViewModel.reset()
             activityIndicator.isHidden = true
             infoLabel.isHidden = true
         }
@@ -80,7 +90,7 @@ extension HomeViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
-        gamesViewModel?.reset()
+        gamesViewModel.reset()
         view.endEditing(true)
     }
     

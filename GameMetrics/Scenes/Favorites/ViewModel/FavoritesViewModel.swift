@@ -8,6 +8,8 @@
 import UIKit
 
 class FavoritesViewModel: GamesCollectionViewModel {
+    var coordinator: GameCoordinator
+    
     func search(keyword: String) {
     }
     
@@ -20,7 +22,8 @@ class FavoritesViewModel: GamesCollectionViewModel {
 
     var delegate: ViewModelDelegate?
     
-    init(delegate: ViewModelDelegate?) {
+    init(delegate: ViewModelDelegate? = nil, coordinator: GameCoordinator) {
+        self.coordinator = coordinator
         self.delegate = delegate
     }
     
