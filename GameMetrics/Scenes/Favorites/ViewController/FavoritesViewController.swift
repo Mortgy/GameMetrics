@@ -31,6 +31,7 @@ class FavoritesViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .always
         title = "Favorites"
         setupCollectionViewModel()
+        registerObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,15 +39,13 @@ class FavoritesViewController: UIViewController {
         favoritesCollectionView.gamesViewModel.fetchData()
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func registerObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(refetchData), name: .favoritedItemUpdated, object: nil)
     }
-    */
+    
+    @objc func refetchData() {
+        favoritesViewModel.fetchData()
+    }
 
 }
 
