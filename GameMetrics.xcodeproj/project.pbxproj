@@ -34,8 +34,8 @@
 		5035DC46260634DE0033AFCF /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5035DC45260634DE0033AFCF /* Production.xcconfig */; };
 		5035DC4F260635050033AFCF /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5035DC4E260635050033AFCF /* Staging.xcconfig */; };
 		5035DC59260635890033AFCF /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5035DC58260635890033AFCF /* Configuration.swift */; };
-		5035DC82260656890033AFCF /* GamesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5035DC81260656890033AFCF /* GamesViewModel.swift */; };
-		5035DC83260656890033AFCF /* GamesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5035DC81260656890033AFCF /* GamesViewModel.swift */; };
+		5035DC82260656890033AFCF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5035DC81260656890033AFCF /* HomeViewModel.swift */; };
+		5035DC83260656890033AFCF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5035DC81260656890033AFCF /* HomeViewModel.swift */; };
 		5035DC8826065D9E0033AFCF /* GamesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5035DC8726065D9E0033AFCF /* GamesEndpoint.swift */; };
 		5035DC8926065D9E0033AFCF /* GamesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5035DC8726065D9E0033AFCF /* GamesEndpoint.swift */; };
 		5035DC8E26065DAD0033AFCF /* GameDetailsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5035DC8D26065DAD0033AFCF /* GameDetailsEndpoint.swift */; };
@@ -106,7 +106,7 @@
 		5035DC45260634DE0033AFCF /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		5035DC4E260635050033AFCF /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		5035DC58260635890033AFCF /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
-		5035DC81260656890033AFCF /* GamesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewModel.swift; sourceTree = "<group>"; };
+		5035DC81260656890033AFCF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		5035DC8726065D9E0033AFCF /* GamesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesEndpoint.swift; sourceTree = "<group>"; };
 		5035DC8D26065DAD0033AFCF /* GameDetailsEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsEndpoint.swift; sourceTree = "<group>"; };
 		5035DCAA26066C6A0033AFCF /* GamesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesCollectionView.swift; sourceTree = "<group>"; };
@@ -326,7 +326,7 @@
 		5035DBB9260291730033AFCF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				5035DC81260656890033AFCF /* GamesViewModel.swift */,
+				5035DC81260656890033AFCF /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -660,7 +660,7 @@
 				5035DBE72602AF130033AFCF /* GameCollectionViewCell.swift in Sources */,
 				5035DC32260608C70033AFCF /* APIEndpoints.swift in Sources */,
 				5035DCE02607C5E70033AFCF /* GameDetailsViewModel.swift in Sources */,
-				5035DC82260656890033AFCF /* GamesViewModel.swift in Sources */,
+				5035DC82260656890033AFCF /* HomeViewModel.swift in Sources */,
 				5035DB5A260286B40033AFCF /* InitialViewController.swift in Sources */,
 				5035DC192604E4C30033AFCF /* GameDetailsModel.swift in Sources */,
 				5035DCAB26066C6A0033AFCF /* GamesCollectionView.swift in Sources */,
@@ -692,7 +692,7 @@
 				5035DB6D260286B70033AFCF /* GameMetricsTests.swift in Sources */,
 				5035DC8F26065DAD0033AFCF /* GameDetailsEndpoint.swift in Sources */,
 				5035DCA126065F880033AFCF /* GameModel.swift in Sources */,
-				5035DC83260656890033AFCF /* GamesViewModel.swift in Sources */,
+				5035DC83260656890033AFCF /* HomeViewModel.swift in Sources */,
 				5035DD1C260806850033AFCF /* String.swift in Sources */,
 				5035DCA226065F880033AFCF /* GameDetailsModel.swift in Sources */,
 			);

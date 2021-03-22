@@ -6,7 +6,7 @@
 //
 
 import UIKit
-class GamesCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, GamesCollectionViewModelDelegate {
+class GamesCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ViewModelDelegate {
     
     var gamesViewModel: GamesCollectionViewModel!
     

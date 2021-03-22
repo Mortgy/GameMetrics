@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var infoLabel: UILabel!
     
     private var pendingRequestWorkItem: DispatchWorkItem?
-    var gamesViewModel: GamesViewModel?
+    var gamesViewModel: HomeViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
     func setupCollectionViewModel() {
-        gamesViewModel = GamesViewModel(delegate: gamesCollectionView)
+        gamesViewModel = HomeViewModel(delegate: gamesCollectionView)
         gamesCollectionView.setupView(gamesViewModel: gamesViewModel!)
     }
 }

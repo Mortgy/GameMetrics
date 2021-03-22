@@ -18,9 +18,9 @@ class FavoritesViewModel: GamesCollectionViewModel {
     internal var fetchedData = [GameModel]()
     internal var loadMore: Bool = false
 
-    var delegate: GamesCollectionViewModelDelegate?
+    var delegate: ViewModelDelegate?
     
-    init(delegate: GamesCollectionViewModelDelegate?) {
+    init(delegate: ViewModelDelegate?) {
         self.delegate = delegate
     }
     

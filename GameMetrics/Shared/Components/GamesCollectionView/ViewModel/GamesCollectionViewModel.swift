@@ -8,7 +8,7 @@
 import Foundation
 
 protocol GamesCollectionViewModel {
-    var delegate: GamesCollectionViewModelDelegate? { set get }
+    var delegate: ViewModelDelegate? { set get }
     var loadMore: Bool { set get }
     func fetchData ()
     func itemsCount() -> Int
@@ -18,7 +18,7 @@ protocol GamesCollectionViewModel {
     func reset ()
 }
 
-protocol GamesCollectionViewModelDelegate: class {
+protocol ViewModelDelegate: class {
     
     func viewModelDidFetchData(loadMore: Bool)
     func viewModelFetchFailed(errorMessage: String)

@@ -20,7 +20,12 @@ class GameCollectionViewCell: UICollectionViewCell {
     }
 
     func setup(with viewModel: GameCellViewModel) {
-        gameImageView.load(url: viewModel.imageURL!)
+        if let imageUrl = viewModel.imageURL {
+            gameImageView.load(url: imageUrl)
+        } else {
+            gameImageView.image = UIImage(named: "placeholder")
+        }
+        
         gameTitleLabel.text = viewModel.name
         gameScoreLabel.text = viewModel.metacritic
         gameGenresLabel.text = viewModel.genres

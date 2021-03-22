@@ -8,15 +8,15 @@
 import UIKit
 import SENetworking
 
-class GamesViewModel: GamesCollectionViewModel, GamesRequestProtocol {
+class HomeViewModel: GamesCollectionViewModel, GamesRequestProtocol {
     internal var fetchedData = [GameModel]()
     internal var gamesRequest: GamesRequest = GamesRequest(search: nil)
     internal var loadMore: Bool = false
     var networkRequest: NetworkCancellable?
     
-    var delegate: GamesCollectionViewModelDelegate?
+    var delegate: ViewModelDelegate?
     
-    init(delegate: GamesCollectionViewModelDelegate?) {
+    init(delegate: ViewModelDelegate?) {
         self.delegate = delegate
     }
     
@@ -45,12 +45,12 @@ class GamesViewModel: GamesCollectionViewModel, GamesRequestProtocol {
         gamesRequest.addPage()
         let endpoint = APIEndpoints.getGames(with: gamesRequest)
         
-        networkRequest = DIContainer.shared.apiDataTransferService.request(with: endpoint) { result in
+        networkRequest = DIContainer.shared.apiDataTransferService.request(with: endpoint) { [weak self] result in
             
             guard case let .success(response) = result, let games = response.results else { return }
-            self.fetchedData.append(contentsOf: games)
-            self.loadMore = response.next != nil ? true : false
-            self.delegate?.viewModelDidFetchData(loadMore: self.loadMore)
+            self?.fetchedData.append(contentsOf: games)
+            self?.loadMore = response.next != nil ? true : false
+            self?.delegate?.viewModelDidFetchData(loadMore: self!.loadMore)
             
         }
     }
