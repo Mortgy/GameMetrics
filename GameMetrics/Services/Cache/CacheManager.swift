@@ -12,6 +12,7 @@ enum CacheLists: String {
     case favoriteGames
     case favoriteGameDetails
     case images
+    case backend
 }
 
 protocol Cache {

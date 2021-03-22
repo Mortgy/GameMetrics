@@ -27,7 +27,7 @@ extension DiskCacheManager {
         
         do {
             let data = try JSONEncoder().encode(value)
-            try data.write(to: URL(string: path)!)
+            try data.write(to: path)
         } catch {
             print(error)
         }
@@ -38,7 +38,7 @@ extension DiskCacheManager {
         
         let path = getCachePath(for: key, in: list?.rawValue)
         
-        guard let data = try? Data(contentsOf: URL(string: path)!), let value = try? JSONDecoder().decode(T.self, from: data) else {
+        guard let data = try? Data(contentsOf: path), let value = try? JSONDecoder().decode(T.self, from: data) else {
             return nil
         }
         
@@ -50,8 +50,8 @@ extension DiskCacheManager {
             let path = getCachePath(for: nil, in: list.rawValue)
             
             var isDirectory: ObjCBool = true
-            if FileManager.default.fileExists(atPath: URL(string: path)!.path, isDirectory: &isDirectory) {
-                let contentList = try FileManager.default.contentsOfDirectory(at: URL(string: path)!, includingPropertiesForKeys: nil)
+            if FileManager.default.fileExists(atPath: path.path, isDirectory: &isDirectory) {
+                let contentList = try FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil)
                 
                 var results = [T]()
                 
@@ -75,14 +75,14 @@ extension DiskCacheManager {
         
         let path = getCachePath(for: key, in: list?.rawValue)
         
-        if FileManager.default.isDeletableFile(atPath: path) {
-            try? FileManager.default.removeItem(at: URL(string: path)!)
+        if FileManager.default.isDeletableFile(atPath: path.path) {
+            try? FileManager.default.removeItem(at: path)
         }
     }
     
     func valueExists(_ key: String, in list: CacheLists?) -> Bool {
         
-        let path = getCachePath(for: key, in: list?.rawValue)
+        let path = getCachePath(for: key, in: list?.rawValue).path
         
         if FileManager.default.fileExists(atPath: path) {
             return true
@@ -93,7 +93,7 @@ extension DiskCacheManager {
 }
 
 extension DiskCacheManager {
-    func getCachePath(for key: String?, in list: String?) -> String {
+    func getCachePath(for key: String?, in list: String?) -> URL {
         var path: URL = cacheDirectory
         
         if let list = list {
@@ -105,7 +105,7 @@ extension DiskCacheManager {
             path = path.appendingPathComponent(key)
         }
         
-        return path.absoluteString
+        return path
     }
     
     func createDirectory(at path: String) {

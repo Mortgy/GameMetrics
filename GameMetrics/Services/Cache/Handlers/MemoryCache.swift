@@ -43,6 +43,16 @@ class MemoryCacheManager: Cache {
         }
     }
     
+    func values<T>(in list: CacheLists) -> [T] where T: Codable {
+        guard let encodedData = UserDefaults.standard.value(forKey: list.rawValue) as? Data,
+              let decodedData = try? JSONDecoder().decode([T].self, from: encodedData) else {
+            return []
+        }
+
+        return decodedData
+
+    }
+    
     func valueExists<T>(value: T, in list: CacheLists) -> Bool where T: Codable, T: Comparable {
         guard let encodedData = UserDefaults.standard.value(forKey: list.rawValue) as? Data,
               let decodedData = try? JSONDecoder().decode([T].self, from: encodedData) else {
@@ -51,6 +61,7 @@ class MemoryCacheManager: Cache {
 
         return decodedData.filter({ return $0 == value }).count > 0 ? true : false
     }
+    
     
     func add<T: Codable>(_ value: T, for key: String, to list: CacheLists?) {
         if let data = try? JSONEncoder().encode(value) {
