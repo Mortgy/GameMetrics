@@ -46,14 +46,25 @@ class HomeViewModel: GamesCollectionViewModel, GamesRequestProtocol {
     
     func fetchData () {
         gamesRequest.addPage()
+        
+        
         let endpoint = APIEndpoints.getGames(with: gamesRequest)
         
+        offlineFirst(endpoint: endpoint)
+
         networkRequest = DIContainer.shared.apiDataTransferService.request(with: endpoint) { [weak self] result in
             
             guard case let .success(response) = result, let games = response.results else { return }
             self?.fetchedData.append(contentsOf: games)
             self?.loadMore = response.next != nil ? true : false
             self?.delegate?.viewModelDidFetchData(loadMore: self!.loadMore)
+            
+        }
+    }
+    
+    func offlineFirst(endpoint: Endpoint<GameResponseModel>) {
+        let cacheName = endpoint.path + "\(gamesRequest.page)".MD5()
+        if  DiskCacheManager().valueExists(cacheName, in: .backend){
             
         }
     }
