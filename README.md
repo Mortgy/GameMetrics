@@ -51,6 +51,7 @@ The app consists of 3 main Scenses / Modlues
 * Images
 * Fonts
 * Color sets
+
 ![File Structure](https://github.com/mortgy/GameMetrics/blob/master/images/file-structure.jpg?raw=true)
 
 ### What are shared Components ?
