@@ -65,7 +65,7 @@ class MemoryCacheManager: Cache {
     }
     
     
-    func add<T: Codable>(_ value: T, for key: String, to list: CacheLists?) {
+    func add<T>(_ value: T, for key: String, to list: CacheLists?) where T: Codable{
         if let data = try? JSONEncoder().encode(value) {
             UserDefaults.standard.setValue(data, forKey: key)
         }

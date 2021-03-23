@@ -34,6 +34,18 @@ class MemoryCacheManagerTests: XCTestCase {
         
     }
     
+    func testValues() throws {
+        
+        MemoryCacheManager.shared.append(value: "test", forList: .seen)
+        MemoryCacheManager.shared.append(value: "test", forList: .seen)
+        
+        let testCache: [String] = MemoryCacheManager.shared.values(in: .seen)
+        XCTAssertEqual(testCache.count, 2, "Array count is 2")
+        XCTAssertGreaterThan(testCache.count, 1, "Array count greater than 1")
+        XCTAssertLessThan(testCache.count, 3, "Array count less than 3")
+
+    }
+    
     func testValueExists() throws {
 
         MemoryCacheManager.shared.append(value: "test", forList: .seen)
@@ -41,18 +53,25 @@ class MemoryCacheManagerTests: XCTestCase {
         XCTAssertTrue(valueExists, "test value exists")
 
     }
-    
-    func testAppend2() throws {
-        
-        MemoryCacheManager.shared.append(value: "test", forList: .seen)
-        MemoryCacheManager.shared.append(value: "test", forList: .seen)
-        
-        let testCache: [String] = MemoryCacheManager().values(in: .seen)
-        XCTAssertEqual(testCache.count, 2, "Array count is 2")
-        XCTAssertGreaterThan(testCache.count, 1, "Array count greater than 1")
-        XCTAssertLessThan(testCache.count, 3, "Array count less than 3")
 
+    func testAddAndValue() throws {
+        
+        MemoryCacheManager.shared.add("test", for: "key", to: nil)
+        
+        if let valueForKey: String = MemoryCacheManager.shared.value("key", from: nil) {
+            XCTAssertEqual(valueForKey, "test", "add value 'key' for key 'key', valueForKey should hold value 'test'")
+        } else {
+            XCTFail("value 'test' should be added to key")
+        }
     }
     
-
+    func testRemove() {
+        MemoryCacheManager.shared.add("test", for: "key", to: nil)
+        MemoryCacheManager.shared.remove("key", from: nil)
+        if let value: String = MemoryCacheManager.shared.value("key", from: nil) {
+            XCTFail("\(value) not removed")
+        } else {
+            XCTAssertTrue(true, "'test' value removed from key 'key'")
+        }
+    }
 }
