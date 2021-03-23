@@ -11,11 +11,13 @@ class FavoritesViewModel: GamesCollectionViewModel {
     internal var fetchedData = [GameModel]()
     internal var loadMore: Bool = false
     var coordinator: GameCoordinator
+    var apiServices: ApiServices
+
     var delegate: ViewModelDelegate?
     
-    init(delegate: ViewModelDelegate? = nil, coordinator: GameCoordinator) {
+    init(coordinator: GameCoordinator, apiServices: ApiServices) {
         self.coordinator = coordinator
-        self.delegate = delegate
+        self.apiServices = apiServices
     }
     
     func fetchData () {

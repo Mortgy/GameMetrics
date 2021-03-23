@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, Alert {
     
     @IBOutlet weak var gamesCollectionView: GamesCollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -76,13 +76,14 @@ extension HomeViewController: UISearchBarDelegate {
                                           execute: requestWorkItem)
         } else if let text = searchBar.text, text.count > 0 && text.count <= 3 {
             pendingRequestWorkItem?.cancel()
-            gamesViewModel.resetNoFetch()
+            gamesViewModel.reset()
             gamesCollectionView.reloadData()
             activityIndicator.isHidden = false
             infoLabel.isHidden = false
         } else {
             pendingRequestWorkItem?.cancel()
             gamesViewModel.reset()
+            gamesViewModel.fetchData()
             activityIndicator.isHidden = true
             infoLabel.isHidden = true
         }
@@ -91,6 +92,7 @@ extension HomeViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         gamesViewModel.reset()
+        gamesViewModel.fetchData()
         view.endEditing(true)
     }
     

@@ -11,7 +11,8 @@ import UIKit
 class FavoritesCoordinator: GameCoordinator {
     
     override func start() {
-        let favoritesViewModel = FavoritesViewModel(coordinator: self)
+        let apiServices = ApiServices()
+        let favoritesViewModel = FavoritesViewModel(coordinator: self, apiServices: apiServices)
         let favoritesViewController = FavoritesViewController(favoritesViewModel: favoritesViewModel)
         favoritesViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         navigationController = UINavigationController(rootViewController:favoritesViewController)

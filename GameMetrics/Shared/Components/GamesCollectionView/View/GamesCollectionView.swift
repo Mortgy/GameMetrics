@@ -9,7 +9,6 @@ import UIKit
 class GamesCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ViewModelDelegate {
     
     var gamesViewModel: GamesCollectionViewModel!
-    weak var controller: (UIViewController & CoordinatorChild)?
     
     func setupView(gamesViewModel: GamesCollectionViewModel) {
         self.gamesViewModel = gamesViewModel
@@ -93,6 +92,7 @@ extension GamesCollectionView {
     
     func viewModelFetchFailed(errorMessage: String) {
         //handle error
+        gamesViewModel.coordinator.showAlert(title: "Network Error", message: errorMessage)
     }
 }
 

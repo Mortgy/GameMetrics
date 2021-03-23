@@ -8,24 +8,30 @@
 import Foundation
 import UIKit
 
-class GameCoordinator: Coordinator {
+class GameCoordinator: Coordinator, Alert {
     
     var children =  [Coordinator]()
     var navigationController: UINavigationController?
     var tabBarViewController: UITabBarController?
     
     func start() {
-        let homeViewModel = HomeViewModel(coordinator: self)
-        let homeViewController = HomeViewController(gamesViewModel: homeViewModel)
-        homeViewController.tabBarItem = UITabBarItem(title: "Games", image: UIImage(named: "gamePad"), tag: 0)
-        navigationController = UINavigationController(rootViewController:homeViewController)
+        
     }
     
     func pushGameDetail(game: GameModel) {
-        let detailViewModel = DetailsViewModel(game: game)
+        let apiServices = ApiServices()
+        let detailViewModel = DetailsViewModel(game: game, apiServices: apiServices)
         
         let detailViewController = DetailViewController(detailViewModel: detailViewModel, game: game)
         navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    func showAlert(title: String, message: String) {
+        var actions = [UIAlertAction]()
+        let action = UIAlertAction(title: "OK", style: .cancel)
+        actions.append(action)
+        
+        showAlert(from: navigationController?.children.last as! (UIViewController & Alert), title: title, message: message, actions: actions)
     }
     
 }

@@ -14,35 +14,30 @@ protocol DetailsViewModelDelegate {
 }
 
 class DetailsViewModel {
-
+    
     var game: GameModel
+    var apiServices: ApiServices
     var gameDetails: GameDetailsModel?
     var gameDetailRequest: GameDetailsRequest?
     var isLoading: Bool = true
     var delegate: DetailsViewModelDelegate?
-
-    init(game: GameModel) {
+    
+    init(game: GameModel, apiServices: ApiServices) {
         self.game = game
+        self.apiServices = apiServices
         gameDetailRequest = GameDetailsRequest(id: self.game.id)
     }
     
     func fetchData() {
-        if DiskCacheManager.shared.valueExists("detailCacheId\(game.id)", in: .favoriteGameDetails) {
-            gameDetails = DiskCacheManager.shared.value("detailCacheId\(game.id)", from: .favoriteGameDetails)
-            isLoading = false
-            delegate?.viewModelDidFetchData(loadMore: false)
-        } else {
-            let endpoint = APIEndpoints.getGame(with: gameDetailRequest!)
-            DIContainer.shared.apiDataTransferService.request(with: endpoint) { [weak self] result in
-                guard case let .success(response) = result else { return }
-                self?.gameDetails = response
-                self?.isLoading = false
-                self?.delegate?.viewModelDidFetchData(loadMore: false)
-            }
-        }
         
+        _ = apiServices.getGameDetails(gameDetailRequest: gameDetailRequest!) { [weak self] result in
+            self?.gameDetails = result
+            self?.isLoading = false
+            self?.delegate?.viewModelDidFetchData(loadMore: false)
+        } fail: { [weak self] errorMessage in
+            self?.delegate?.viewModelFetchFailed(errorMessage: errorMessage)
+        }
     }
-    
     
 }
 
@@ -74,7 +69,6 @@ extension DetailsViewModel {
     
 }
 
-
 // MARK: - Favorite Management
 extension DetailsViewModel {
     
@@ -85,19 +79,19 @@ extension DetailsViewModel {
     func toggleFavorite() {
         if isFavorited() {
             MemoryCacheManager.shared.pop(value: "\(game.id)", forList: .favoriteGames)
-
+            
             DiskCacheManager.shared.remove("\(game.id)", from: .favoriteGames)
             DiskCacheManager.shared.remove(gameDetails!.detailCacheId, from: .favoriteGameDetails)
         } else {
             MemoryCacheManager.shared.append(value: "\(game.id)", forList: .favoriteGames)
-
+            
             DiskCacheManager.shared.add(game, for: "\(game.id)", to: .favoriteGames)
             DiskCacheManager.shared.add(gameDetails, for: gameDetails!.detailCacheId, to: .favoriteGameDetails)
         }
         
         delegate?.favoriteUpdated()
         NotificationCenter.default.post(name: .favoritedItemUpdated, object: nil)
-
+        
     }
     
 }

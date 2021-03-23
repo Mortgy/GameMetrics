@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoritesViewController: UIViewController {
+class FavoritesViewController: UIViewController, Alert {
     
     weak var coordinator: FavoritesCoordinator?
 

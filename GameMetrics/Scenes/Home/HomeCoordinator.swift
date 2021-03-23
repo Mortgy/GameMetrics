@@ -11,7 +11,9 @@ import UIKit
 class HomeCoordinator: GameCoordinator {
     
     override func start() {
-        let homeViewModel = HomeViewModel(coordinator: self)
+        let apiServices = ApiServices()
+        
+        let homeViewModel = HomeViewModel(coordinator: self, apiServices: apiServices)
         let homeViewController = HomeViewController(gamesViewModel: homeViewModel)
         homeViewController.tabBarItem = UITabBarItem(title: "Games", image: UIImage(named: "gamePad"), tag: 0)
         navigationController = UINavigationController(rootViewController:homeViewController)

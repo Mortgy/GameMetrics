@@ -8,9 +8,12 @@
 import Foundation
 
 protocol GamesCollectionViewModel {
+    var apiServices: ApiServices { get set }
+    var coordinator: GameCoordinator { get set }
+    
     var delegate: ViewModelDelegate? { set get }
     var loadMore: Bool { set get }
-    var coordinator: GameCoordinator { get set }
+    
     func fetchData ()
     func itemsCount() -> Int
     func itemAtIndex<T>(index: Int) -> T

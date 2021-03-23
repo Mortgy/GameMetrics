@@ -7,8 +7,8 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, DetailsViewModelDelegate {
-
+class DetailViewController: UIViewController, DetailsViewModelDelegate, Alert {
+    
     @IBOutlet weak var gameTitleLabel: UILabel!
     @IBOutlet weak var gameImageView: UIImageView!
     @IBOutlet weak var gameDescriptionLabel: UILabel!
@@ -35,11 +35,10 @@ class DetailViewController: UIViewController, DetailsViewModelDelegate {
         // Do any additional setup after loading the view.
         favoriteButton = UIBarButtonItem(title: detailViewModel.favoriteButtonTitle, style: .plain, target: self, action: #selector(toggleFavoriteAction))
         self.navigationItem.rightBarButtonItem = favoriteButton
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
         setupUI()
         self.detailViewModel.fetchData()
@@ -56,7 +55,7 @@ extension DetailViewController {
         if gameDescriptionLabel.numberOfLines == 0 {
             gameDescriptionLabel.numberOfLines = 4
             sender.setTitle("read more", for: .normal)
-
+            
         } else {
             gameDescriptionLabel.numberOfLines = 0
             sender.setTitle("less", for: .normal)
@@ -74,8 +73,12 @@ extension DetailViewController {
     }
     
     func viewModelFetchFailed(errorMessage: String) {
-        
+        var actions = [UIAlertAction]()
+        let action = UIAlertAction(title: "OK", style: .cancel)
+        actions.append(action)
+        showAlert(from: self, title: "Network Error", message: errorMessage, actions: actions)
     }
+    
 }
 
 extension DetailViewController {
