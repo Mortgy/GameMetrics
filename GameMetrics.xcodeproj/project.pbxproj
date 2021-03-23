@@ -191,7 +191,6 @@
 		5035DB54260286B40033AFCF /* GameMetrics */ = {
 			isa = PBXGroup;
 			children = (
-				504E7BE82608B45E00492658 /* Coordinator */,
 				5035DC3C260633AB0033AFCF /* Environment */,
 				5035DBEF2602B7A90033AFCF /* Extenstions */,
 				5035DBCB260295170033AFCF /* Services */,
@@ -350,6 +349,7 @@
 		5035DBCA260294C00033AFCF /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				504E7C7A2609F1EA00492658 /* Protocols */,
 				5035DCEB2607CE050033AFCF /* Components */,
 				5035DC172604E25F0033AFCF /* Models */,
 				5035DBFB2603B3F20033AFCF /* CustomViews */,
@@ -531,6 +531,14 @@
 				504E7C52260936CC00492658 /* GameCellViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		504E7C7A2609F1EA00492658 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				504E7BE82608B45E00492658 /* Coordinator */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

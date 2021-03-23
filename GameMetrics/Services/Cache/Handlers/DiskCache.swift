@@ -9,6 +9,8 @@ import Foundation
 
 class DiskCacheManager : Cache {
     
+    static let shared = DiskCacheManager()
+    
     var cacheDirectory : URL {
         let homeDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         return homeDirectory.appendingPathComponent("cache")
@@ -24,14 +26,17 @@ extension DiskCacheManager {
     func add<T>(_ value: T, for key: String, to list: CacheLists?) where T: Codable {
         
         let path = getCachePath(for: key, in: list?.rawValue)
-        
-        do {
-            let data = try JSONEncoder().encode(value)
-            try data.write(to: path)
-        } catch {
-            print(error)
+        DispatchQueue.global(qos: .background).async {
+            do {
+                
+                let data = try? JSONEncoder().encode(value)
+                try data?.write(to: path)
+                
+                
+            } catch {
+                print(error)
+            }
         }
-        
     }
     
     func value<T: Codable>(_ key: String, from list: CacheLists?) -> T? {

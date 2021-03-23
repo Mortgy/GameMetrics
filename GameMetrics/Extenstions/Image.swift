@@ -12,7 +12,7 @@ extension UIImageView {
         let urlMd5 = url.absoluteString.MD5()
         
         DispatchQueue.global().async { [weak self] in
-            if let data: Data = DiskCacheManager().value(urlMd5, from: .images) {
+            if let data: Data = DiskCacheManager.shared.value(urlMd5, from: .images) {
                 DispatchQueue.main.async {
                     self?.image = UIImage(data: data)
                 }
@@ -20,7 +20,7 @@ extension UIImageView {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
                         self?.image = image
-                        DiskCacheManager().add(data, for: url.absoluteString.MD5(), to: .images)
+                        DiskCacheManager.shared.add(data, for: url.absoluteString.MD5(), to: .images)
                     }
                 }
             }

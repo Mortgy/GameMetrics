@@ -7,20 +7,40 @@
 
 import UIKit
 
-class GradientView: UIView {
-
-    lazy var gradientLayer: CAGradientLayer = {
-        let layer = CAGradientLayer()
-        layer.frame = self.bounds
-        layer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        return layer
-    }()
+@IBDesignable class GradientView: UIView {
     
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-        self.backgroundColor = UIColor.clear
-        self.layer.addSublayer(gradientLayer)
+    var gradientLayer: CAGradientLayer {
+        return layer as! CAGradientLayer
+    }
+    
+    override open class var layerClass: AnyClass {
+        return CAGradientLayer.classForCoder()
+    }
+    
+    @IBInspectable var startColor: UIColor? {
+        didSet { gradientLayer.colors = cgColorGradient }
+    }
+    
+    @IBInspectable var endColor: UIColor? {
+        didSet { gradientLayer.colors = cgColorGradient }
+    }
+    
+    @IBInspectable var startPoint: CGPoint = CGPoint(x: 0.0, y: 0.0) {
+        didSet { gradientLayer.startPoint = startPoint }
+    }
+    
+    @IBInspectable var endPoint: CGPoint = CGPoint(x: 1.0, y: 1.0) {
+        didSet { gradientLayer.endPoint = endPoint }
+    }
+}
+
+extension GradientView {
+    
+    internal var cgColorGradient: [CGColor]? {
+        guard let startColor = startColor, let endColor = endColor else {
+            return nil
+        }
+        
+        return [startColor.cgColor, endColor.cgColor]
     }
 }

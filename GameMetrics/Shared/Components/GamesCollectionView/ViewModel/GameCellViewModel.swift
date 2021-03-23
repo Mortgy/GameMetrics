@@ -30,7 +30,7 @@ struct GameCellViewModel {
     }
     
     var seen: Bool {
-        return MemoryCacheManager().valueExists(value: game.id, in: .seen)
+        return MemoryCacheManager.shared.valueExists(value: game.id, in: .seen)
     }
     
     var metacritic: String? {
@@ -42,7 +42,7 @@ struct GameCellViewModel {
     }
     
     func markAsSeen() {
-        MemoryCacheManager().append(value: game.id, forList: .seen)
+        MemoryCacheManager.shared.append(value: game.id, forList: .seen)
         NotificationCenter.default.post(name: .seenItemUpdated, object: nil)
     }
     

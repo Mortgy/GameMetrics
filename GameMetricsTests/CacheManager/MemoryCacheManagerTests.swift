@@ -12,13 +12,13 @@ class MemoryCacheManagerTests: XCTestCase {
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        MemoryCacheManager().pop(value: "test", forList: .seen)
+        MemoryCacheManager.shared.pop(value: "test", forList: .seen)
 
     }
     
     func testPop() throws {
         
-        MemoryCacheManager().pop(value: "test", forList: .seen)
+        MemoryCacheManager.shared.pop(value: "test", forList: .seen)
         let testCache: [String] = MemoryCacheManager().values(in: .seen)
         XCTAssertEqual(testCache.count, 0, "Array count should be 0")
         
@@ -26,7 +26,7 @@ class MemoryCacheManagerTests: XCTestCase {
     
     func testAppend() throws {
         
-        MemoryCacheManager().append(value: "test", forList: .seen)
+        MemoryCacheManager.shared.append(value: "test", forList: .seen)
         let testCache: [String] = MemoryCacheManager().values(in: .seen)
         
         XCTAssertEqual(testCache, ["test"])
@@ -36,7 +36,7 @@ class MemoryCacheManagerTests: XCTestCase {
     
     func testValueExists() throws {
 
-        MemoryCacheManager().append(value: "test", forList: .seen)
+        MemoryCacheManager.shared.append(value: "test", forList: .seen)
         let valueExists = MemoryCacheManager().valueExists(value: "test", in: .seen)
         XCTAssertTrue(valueExists, "test value exists")
 
@@ -44,8 +44,8 @@ class MemoryCacheManagerTests: XCTestCase {
     
     func testAppend2() throws {
         
-        MemoryCacheManager().append(value: "test", forList: .seen)
-        MemoryCacheManager().append(value: "test", forList: .seen)
+        MemoryCacheManager.shared.append(value: "test", forList: .seen)
+        MemoryCacheManager.shared.append(value: "test", forList: .seen)
         
         let testCache: [String] = MemoryCacheManager().values(in: .seen)
         XCTAssertEqual(testCache.count, 2, "Array count is 2")

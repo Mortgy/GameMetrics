@@ -9,6 +9,8 @@ import Foundation
 
 class MemoryCacheManager: Cache {
     
+    static let shared = MemoryCacheManager()
+
     func append<T>(value: T, forList list: CacheLists) where T: Codable{
         
         var array = [T]()

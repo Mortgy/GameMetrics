@@ -8,18 +8,9 @@
 import UIKit
 
 class FavoritesViewModel: GamesCollectionViewModel {
-    var coordinator: GameCoordinator
-    
-    func search(keyword: String) {
-    }
-    
-    func reset() {
-    }
-    
-    
     internal var fetchedData = [GameModel]()
     internal var loadMore: Bool = false
-
+    var coordinator: GameCoordinator
     var delegate: ViewModelDelegate?
     
     init(delegate: ViewModelDelegate? = nil, coordinator: GameCoordinator) {
@@ -28,7 +19,7 @@ class FavoritesViewModel: GamesCollectionViewModel {
     }
     
     func fetchData () {
-        fetchedData = DiskCacheManager().values(in: .favoriteGames)
+        fetchedData = DiskCacheManager.shared.values(in: .favoriteGames)
         delegate?.viewModelDidFetchData(loadMore: self.loadMore)
     }
     
@@ -42,5 +33,11 @@ class FavoritesViewModel: GamesCollectionViewModel {
     
     func cellViewModelForIndex<T>(index: Int) -> T {
         return GameCellViewModel(game: fetchedData[index]) as! T
+    }
+    
+    func search(keyword: String) {
+    }
+    
+    func reset() {
     }
 }

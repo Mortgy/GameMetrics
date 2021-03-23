@@ -15,7 +15,6 @@ class HomeViewModel: GamesCollectionViewModel, GamesRequestProtocol {
     internal var gamesRequest: GamesRequest = GamesRequest(search: nil)
     internal var loadMore: Bool = false
     var networkRequest: NetworkCancellable?
-    
     var delegate: ViewModelDelegate?
     
     init(delegate: ViewModelDelegate? = nil, coordinator: GameCoordinator) {
@@ -46,27 +45,54 @@ class HomeViewModel: GamesCollectionViewModel, GamesRequestProtocol {
     
     func fetchData () {
         gamesRequest.addPage()
-        
-        
         let endpoint = APIEndpoints.getGames(with: gamesRequest)
-        
-        offlineFirst(endpoint: endpoint)
+        let cacheName = (endpoint.path + "\(gamesRequest.page)").MD5()
 
-        networkRequest = DIContainer.shared.apiDataTransferService.request(with: endpoint) { [weak self] result in
-            
-            guard case let .success(response) = result, let games = response.results else { return }
-            self?.fetchedData.append(contentsOf: games)
-            self?.loadMore = response.next != nil ? true : false
-            self?.delegate?.viewModelDidFetchData(loadMore: self!.loadMore)
-            
+        DispatchQueue.global(qos: .background).async { [weak self] in
+
+            if self?.offlineFirst(cacheName: cacheName) == false  {
+                self?.networkRequest = DIContainer.shared.apiDataTransferService.request(with: endpoint) { [weak self] result in
+                    
+                    guard case let .success(response) = result, let games = response.results else { return }
+                    
+                    self?.fetchedData.append(contentsOf: games)
+                    self?.loadMore = response.next != nil ? true : false
+                    
+                    DispatchQueue.main.async { [weak self] in
+                        self?.delegate?.viewModelDidFetchData(loadMore: self!.loadMore)
+                    }
+                    
+                    self?.isSearching() == false ? DiskCacheManager.shared.add(response, for: cacheName, to: .backend) : nil
+                }
+            }
         }
+        
     }
     
-    func offlineFirst(endpoint: Endpoint<GameResponseModel>) {
-        let cacheName = endpoint.path + "\(gamesRequest.page)".MD5()
-        if  DiskCacheManager().valueExists(cacheName, in: .backend){
+    func offlineFirst(cacheName: String) -> Bool {
+        if  DiskCacheManager.shared.valueExists(cacheName, in: .backend){
+            guard isSearching() == false, let response: GameResponseModel = DiskCacheManager.shared.value(cacheName, from: .backend) else {
+                return false
+            }
+            fetchedData.append(contentsOf: response.results!)
+            loadMore = response.next != nil ? true : false
             
+            DispatchQueue.main.async { [weak self] in
+                self?.delegate?.viewModelDidFetchData(loadMore: self!.loadMore)
+            }
+            
+            return true
         }
+        
+        return false
+
+    }
+    
+    func isSearching() -> Bool {
+        if gamesRequest.search != nil {
+            return true
+        }
+        return false
     }
     
     func itemsCount() -> Int {

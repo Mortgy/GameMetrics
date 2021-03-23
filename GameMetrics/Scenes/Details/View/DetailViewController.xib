@@ -22,14 +22,14 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vmW-nB-Rab">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="vmW-nB-Rab">
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vuQ-nd-ZO2" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="894.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="876.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="1aS-Nh-yFm">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="894.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="876.5"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l13-FZ-4Fp">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="321.5"/>
@@ -40,9 +40,20 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uFH-t8-dLW" customClass="GradientView" customModule="GameMetrics" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="109.5" width="414" height="212"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="uFH-t8-dLW" secondAttribute="height" multiplier="414:212" id="zUs-qk-u9n"/>
-                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
+                                                            <point key="value" x="0.0" y="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                                                            <point key="value" x="0.0" y="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Br-Kd-Z08">
                                                     <rect key="frame" x="16" y="262.5" width="382" height="43"/>
@@ -53,24 +64,25 @@
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
-                                                <constraint firstItem="uFH-t8-dLW" firstAttribute="leading" secondItem="l13-FZ-4Fp" secondAttribute="leading" id="5qz-x1-kzt"/>
                                                 <constraint firstItem="Qz0-X7-Jwk" firstAttribute="top" secondItem="l13-FZ-4Fp" secondAttribute="top" id="AF6-Lu-6sH"/>
-                                                <constraint firstAttribute="trailing" secondItem="uFH-t8-dLW" secondAttribute="trailing" id="EMD-xY-Pew"/>
                                                 <constraint firstAttribute="bottom" secondItem="Qz0-X7-Jwk" secondAttribute="bottom" id="FSB-r1-vSG"/>
+                                                <constraint firstItem="uFH-t8-dLW" firstAttribute="leading" secondItem="Qz0-X7-Jwk" secondAttribute="leading" id="H3V-ao-SrV"/>
                                                 <constraint firstItem="2Br-Kd-Z08" firstAttribute="leading" secondItem="l13-FZ-4Fp" secondAttribute="leading" constant="16" id="IOm-HV-8Wi"/>
                                                 <constraint firstAttribute="trailing" secondItem="Qz0-X7-Jwk" secondAttribute="trailing" id="KV2-MO-r0t"/>
+                                                <constraint firstItem="uFH-t8-dLW" firstAttribute="bottom" secondItem="Qz0-X7-Jwk" secondAttribute="bottom" id="Odl-pK-tR6"/>
                                                 <constraint firstItem="Qz0-X7-Jwk" firstAttribute="leading" secondItem="l13-FZ-4Fp" secondAttribute="leading" id="Oup-mH-geh"/>
                                                 <constraint firstAttribute="bottom" secondItem="2Br-Kd-Z08" secondAttribute="bottom" constant="16" id="VEL-Ll-vbP"/>
                                                 <constraint firstAttribute="trailing" secondItem="2Br-Kd-Z08" secondAttribute="trailing" constant="16" id="W5J-Yg-UxQ"/>
-                                                <constraint firstAttribute="bottom" secondItem="uFH-t8-dLW" secondAttribute="bottom" id="dDe-h3-fbX"/>
+                                                <constraint firstItem="uFH-t8-dLW" firstAttribute="trailing" secondItem="Qz0-X7-Jwk" secondAttribute="trailing" id="f0H-zU-YVi"/>
                                                 <constraint firstAttribute="width" secondItem="l13-FZ-4Fp" secondAttribute="height" multiplier="375:291" id="uai-M5-hLV"/>
+                                                <constraint firstItem="uFH-t8-dLW" firstAttribute="height" secondItem="Qz0-X7-Jwk" secondAttribute="height" multiplier="0.659409" id="x5P-Dc-hs8"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w0K-LZ-swv">
-                                            <rect key="frame" x="0.0" y="321.5" width="414" height="573"/>
+                                            <rect key="frame" x="0.0" y="321.5" width="414" height="555"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bdb-8u-jUQ">
-                                                    <rect key="frame" x="16" y="16" width="382" height="541"/>
+                                                    <rect key="frame" x="16" y="16" width="382" height="523"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NiC-pl-eiT">
                                                             <rect key="frame" x="0.0" y="0.0" width="382" height="21"/>
@@ -82,14 +94,14 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXs-ZI-TFv">
-                                                            <rect key="frame" x="0.0" y="21" width="382" height="355"/>
+                                                            <rect key="frame" x="0.0" y="21" width="382" height="337"/>
                                                             <string key="text">Rockstar Games went bigger, since their previous installment of the series. You get the complicated and realistic world-building from Liberty City of GTA4 in the setting of lively and diverse Los Santos, from an old fan favorite GTA San Andreas. 561 different vehicles (including every transport you can operate)....</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                             <color key="textColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMs-Rz-xb2">
-                                                            <rect key="frame" x="0.0" y="376" width="382" height="54"/>
+                                                            <rect key="frame" x="0.0" y="358" width="382" height="54"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="54" id="LaU-TU-aIK"/>
                                                             </constraints>
@@ -99,33 +111,33 @@
                                                             </connections>
                                                         </button>
                                                         <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vgM-Go-5o3">
-                                                            <rect key="frame" x="0.0" y="430" width="382" height="1"/>
+                                                            <rect key="frame" x="0.0" y="412" width="382" height="1"/>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="gcd-qZ-Mbt"/>
                                                             </constraints>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sBP-XR-vhO">
-                                                            <rect key="frame" x="0.0" y="431" width="382" height="54"/>
+                                                            <rect key="frame" x="0.0" y="413" width="382" height="54"/>
                                                             <state key="normal" title="Visit reddit">
                                                                 <color key="titleColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                         </button>
                                                         <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5mX-gs-29e">
-                                                            <rect key="frame" x="0.0" y="485" width="382" height="1"/>
+                                                            <rect key="frame" x="0.0" y="467" width="382" height="1"/>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="j8o-yf-DNG"/>
                                                             </constraints>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WiP-O4-Qdc">
-                                                            <rect key="frame" x="0.0" y="486" width="382" height="54"/>
+                                                            <rect key="frame" x="0.0" y="468" width="382" height="54"/>
                                                             <state key="normal" title="Visit website">
                                                                 <color key="titleColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                         </button>
                                                         <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wBe-Mu-3xg">
-                                                            <rect key="frame" x="0.0" y="540" width="382" height="1"/>
+                                                            <rect key="frame" x="0.0" y="522" width="382" height="1"/>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="N8l-gr-17b"/>
@@ -160,9 +172,10 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="vuQ-nd-ZO2" firstAttribute="top" secondItem="vmW-nB-Rab" secondAttribute="top" id="A84-op-koL"/>
-                        <constraint firstItem="vuQ-nd-ZO2" firstAttribute="leading" secondItem="vmW-nB-Rab" secondAttribute="leading" id="ONj-yj-Z7e"/>
+                        <constraint firstItem="vuQ-nd-ZO2" firstAttribute="leadingMargin" secondItem="vmW-nB-Rab" secondAttribute="leading" constant="8" id="ONj-yj-Z7e"/>
                         <constraint firstAttribute="bottom" secondItem="vuQ-nd-ZO2" secondAttribute="bottom" id="aIj-mf-yPQ"/>
-                        <constraint firstAttribute="trailing" secondItem="vuQ-nd-ZO2" secondAttribute="trailing" id="cjI-zf-jU6"/>
+                        <constraint firstItem="vuQ-nd-ZO2" firstAttribute="width" secondItem="vmW-nB-Rab" secondAttribute="width" id="beH-7m-ZiF"/>
+                        <constraint firstAttribute="trailing" secondItem="vuQ-nd-ZO2" secondAttribute="trailingMargin" constant="8" id="cjI-zf-jU6"/>
                     </constraints>
                     <viewLayoutGuide key="contentLayoutGuide" id="4qy-6B-bGr"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="bXz-Fv-snS"/>
@@ -171,7 +184,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="vuQ-nd-ZO2" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="9iq-th-fHC"/>
+                <constraint firstItem="vuQ-nd-ZO2" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" priority="250" id="9iq-th-fHC"/>
                 <constraint firstItem="vmW-nB-Rab" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Jh0-Wr-8Fs"/>
                 <constraint firstItem="vuQ-nd-ZO2" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" priority="250" id="cvM-HK-kD3"/>
                 <constraint firstItem="vmW-nB-Rab" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="fha-t4-M3Y"/>

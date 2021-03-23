@@ -27,8 +27,7 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vrl-i8-jeJ">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="104"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="104" id="1g5-Y0-Dle"/>
-                                            <constraint firstAttribute="width" constant="120" id="sR3-93-B1e"/>
+                                            <constraint firstAttribute="width" secondItem="vrl-i8-jeJ" secondAttribute="height" multiplier="120:104" id="Z3d-Bn-PP6"/>
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="PHC-h4-dGx">
@@ -71,6 +70,9 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="vrl-i8-jeJ" firstAttribute="width" secondItem="PHC-h4-dGx" secondAttribute="height" multiplier="15:13" id="qOv-B9-9Ho"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
