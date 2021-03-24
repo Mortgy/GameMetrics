@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import SafariServices
 
-class DetailViewController: UIViewController, DetailsViewModelDelegate, Alert {
+class DetailViewController: UIViewController, DetailsViewModelDelegate, Alert, SafariOpenURL {
     
     @IBOutlet weak var gameTitleLabel: UILabel!
     @IBOutlet weak var gameImageView: UIImageView!
     @IBOutlet weak var gameDescriptionLabel: UILabel!
+    @IBOutlet weak var redditButton: UIButton!
+    @IBOutlet weak var websiteButton: UIButton!
     
     var favoriteButton: UIBarButtonItem?
     
@@ -61,6 +64,15 @@ extension DetailViewController {
             sender.setTitle("less", for: .normal)
         }
     }
+    
+    @IBAction func openWebsiteAction(_ sender: Any) {
+        openURL(targetURL: detailViewModel.websiteURL!)
+    }
+    
+    @IBAction func openRedditAction(_ sender: Any) {
+        openURL(targetURL: detailViewModel.redditURL!)
+    }
+    
 }
 
 extension DetailViewController {
@@ -92,5 +104,13 @@ extension DetailViewController {
         }
         
         gameDescriptionLabel.text = detailViewModel.descripton
+        
+        if let _ = detailViewModel.redditURL {
+            redditButton.isEnabled = true
+        }
+        
+        if let _ = detailViewModel.websiteURL {
+            websiteButton.isEnabled = true
+        }
     }
 }
