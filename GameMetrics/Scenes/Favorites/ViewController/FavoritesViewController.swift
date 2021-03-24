@@ -52,7 +52,7 @@ class FavoritesViewController: UIViewController, Alert {
 extension FavoritesViewController {
     func setupCollectionViewModel() {
         favoritesViewModel.delegate = favoritesCollectionView
-        favoritesCollectionView.setupView(gamesViewModel: favoritesViewModel)
+        favoritesCollectionView.setupView(gamesViewModel: favoritesViewModel, emptyStateMessage: "There is no favourites found.")
     }
 }
 

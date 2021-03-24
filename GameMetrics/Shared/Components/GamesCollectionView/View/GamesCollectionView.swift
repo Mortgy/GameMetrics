@@ -8,10 +8,15 @@
 import UIKit
 class GamesCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ViewModelDelegate {
     
-    var gamesViewModel: GamesCollectionViewModel!
+    @IBOutlet weak var infoLabel: UILabel?
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView?
     
-    func setupView(gamesViewModel: GamesCollectionViewModel) {
+    var gamesViewModel: GamesCollectionViewModel!
+    var emptyStateMessage: String!
+    
+    func setupView(gamesViewModel: GamesCollectionViewModel, emptyStateMessage: String) {
         self.gamesViewModel = gamesViewModel
+        self.emptyStateMessage = emptyStateMessage
         
         setupUI()
         setupViewModel()
@@ -33,6 +38,13 @@ extension GamesCollectionView {
     
     func setupUI() {
         setupCollectionView()
+        setupEmptyStateLabel()
+    }
+    
+    func setupEmptyStateLabel() {
+        if infoLabel == infoLabel {
+            infoLabel?.text = emptyStateMessage
+        }
     }
     
     func setupCollectionView() {
@@ -73,6 +85,7 @@ extension GamesCollectionView {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if showLoadMoreCell(for: indexPath) {
             gamesViewModel.fetchData()
+            activityIndicator?.isHidden = false
         }
     }
     
@@ -87,6 +100,10 @@ extension GamesCollectionView {
 // MARK: - View Model Delegate
 extension GamesCollectionView {
     func viewModelDidFetchData(loadMore: Bool) {
+        if gamesViewModel.itemsCount() > 0 {
+            infoLabel?.isHidden = true
+            activityIndicator?.isHidden = true
+        }
         self.reloadData()
     }
     

@@ -12,7 +12,6 @@ class HomeViewController: UIViewController, Alert {
     @IBOutlet weak var gamesCollectionView: GamesCollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var infoLabel: UILabel!
     
     private var pendingRequestWorkItem: DispatchWorkItem?
     var gamesViewModel: HomeViewModel
@@ -43,7 +42,7 @@ class HomeViewController: UIViewController, Alert {
 extension HomeViewController {
     func setupCollectionViewModel() {
         self.gamesViewModel.delegate = gamesCollectionView
-        gamesCollectionView.setupView(gamesViewModel: gamesViewModel)
+        gamesCollectionView.setupView(gamesViewModel: gamesViewModel, emptyStateMessage: "No game has been searched.")
     }
 }
 
@@ -62,7 +61,6 @@ extension HomeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let text = searchBar.text, text.count > 3 {
             activityIndicator.isHidden = true
-            infoLabel.isHidden = true
             
             pendingRequestWorkItem?.cancel()
             
@@ -74,18 +72,10 @@ extension HomeViewController: UISearchBarDelegate {
             pendingRequestWorkItem = requestWorkItem
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(750),
                                           execute: requestWorkItem)
-        } else if let text = searchBar.text, text.count > 0 && text.count <= 3 {
+        } else if let text = searchBar.text, text.count <= 3 {
             pendingRequestWorkItem?.cancel()
             gamesViewModel.reset()
             gamesCollectionView.reloadData()
-            activityIndicator.isHidden = false
-            infoLabel.isHidden = false
-        } else {
-            pendingRequestWorkItem?.cancel()
-            gamesViewModel.reset()
-            gamesViewModel.fetchData()
-            activityIndicator.isHidden = true
-            infoLabel.isHidden = true
         }
     }
     

@@ -29,7 +29,20 @@
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="activityIndicator" destination="71H-4m-JyL" id="VFt-AP-JB3"/>
+                        <outlet property="infoLabel" destination="g5B-FV-QRr" id="U2W-uV-c2r"/>
+                    </connections>
                 </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is no favourites found." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5B-FV-QRr">
+                    <rect key="frame" x="98.5" y="80" width="217" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="71H-4m-JyL">
+                    <rect key="frame" x="197" y="443" width="20" height="20"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -38,6 +51,10 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="wLK-7d-7vH" secondAttribute="trailing" id="453-v0-9K4"/>
                 <constraint firstItem="wLK-7d-7vH" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="9M8-R2-PUn"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="wLK-7d-7vH" secondAttribute="bottom" id="B9m-by-8c6"/>
+                <constraint firstItem="71H-4m-JyL" firstAttribute="centerX" secondItem="wLK-7d-7vH" secondAttribute="centerX" id="jL7-fb-3kq"/>
+                <constraint firstItem="71H-4m-JyL" firstAttribute="centerY" secondItem="wLK-7d-7vH" secondAttribute="centerY" id="odu-mg-t25"/>
+                <constraint firstItem="g5B-FV-QRr" firstAttribute="top" secondItem="wLK-7d-7vH" secondAttribute="top" constant="36" id="uXw-fm-mQ1"/>
+                <constraint firstItem="g5B-FV-QRr" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="zV3-0K-E11"/>
             </constraints>
             <point key="canvasLocation" x="-188.40579710144928" y="88.392857142857139"/>
         </view>

@@ -8,7 +8,17 @@
 import Foundation
 import SENetworking
 
-class ApiServices {
+protocol ApiServicesProtocol {
+    
+    func getGames(gamesRequest: GamesRequest, from cache: Bool, success: @escaping (GameResponseModel) -> Void, fail: @escaping (String) -> Void) -> (NetworkCancellable?, GameResponseModel?)
+    func getGameDetails(gameDetailRequest: GameDetailsRequest,
+                          success: @escaping (GameDetailsModel) -> Void,
+                          fail: @escaping (String) -> Void) -> NetworkCancellable?
+    func gamesOfflineFirst(cacheName: String) -> GameResponseModel?
+    
+}
+
+class ApiServices: ApiServicesProtocol {
     func getGames(gamesRequest: GamesRequest, from cache: Bool, success: @escaping (GameResponseModel) -> Void, fail: @escaping (String) -> Void) -> (NetworkCancellable?, GameResponseModel?) {
         
         let endpoint = APIEndpoints.getGames(with: gamesRequest)
