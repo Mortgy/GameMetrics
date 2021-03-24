@@ -43,8 +43,8 @@ class ApiServices: ApiServicesProtocol {
                         success: @escaping (GameDetailsModel) -> Void,
                         fail: @escaping (String) -> Void) -> NetworkCancellable? {
         
-        if DiskCacheManager.shared.valueExists("detailCacheId\(gameDetailRequest.id!)", in: .favoriteGameDetails) {
-            if let gameDetails: GameDetailsModel = DiskCacheManager.shared.value("detailCacheId\(gameDetailRequest.id!)", from: .favoriteGameDetails) {
+        if DiskCacheManager.shared.valueExists("detailCacheId\(gameDetailRequest.id)", in: .favoriteGameDetails) {
+            if let gameDetails: GameDetailsModel = DiskCacheManager.shared.value("detailCacheId\(gameDetailRequest.id)", from: .favoriteGameDetails) {
                 success(gameDetails)
             }
             return nil

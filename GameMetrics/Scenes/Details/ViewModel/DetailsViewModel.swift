@@ -30,13 +30,16 @@ class DetailsViewModel {
     
     func fetchData() {
         
-        _ = apiServices.getGameDetails(gameDetailRequest: gameDetailRequest!) { [weak self] result in
-            self?.gameDetails = result
-            self?.isLoading = false
-            self?.delegate?.viewModelDidFetchData(loadMore: false)
-        } fail: { [weak self] errorMessage in
-            self?.delegate?.viewModelFetchFailed(errorMessage: errorMessage)
+        if let gameDetailRequest = gameDetailRequest {
+            _ = apiServices.getGameDetails(gameDetailRequest: gameDetailRequest) { [weak self] result in
+                self?.gameDetails = result
+                self?.isLoading = false
+                self?.delegate?.viewModelDidFetchData(loadMore: false)
+            } fail: { [weak self] errorMessage in
+                self?.delegate?.viewModelFetchFailed(errorMessage: errorMessage)
+            }
         }
+
     }
     
 }
@@ -77,16 +80,18 @@ extension DetailsViewModel {
     }
     
     func toggleFavorite() {
-        if isFavorited() {
-            MemoryCacheManager.shared.pop(value: "\(game.id)", forList: .favoriteGames)
-            
-            DiskCacheManager.shared.remove("\(game.id)", from: .favoriteGames)
-            DiskCacheManager.shared.remove(gameDetails!.detailCacheId, from: .favoriteGameDetails)
-        } else {
-            MemoryCacheManager.shared.append(value: "\(game.id)", forList: .favoriteGames)
-            
-            DiskCacheManager.shared.add(game, for: "\(game.id)", to: .favoriteGames)
-            DiskCacheManager.shared.add(gameDetails, for: gameDetails!.detailCacheId, to: .favoriteGameDetails)
+        if let gameDetails = gameDetails {
+            if isFavorited() {
+                MemoryCacheManager.shared.pop(value: "\(game.id)", forList: .favoriteGames)
+                
+                DiskCacheManager.shared.remove("\(game.id)", from: .favoriteGames)
+                DiskCacheManager.shared.remove(gameDetails.detailCacheId, from: .favoriteGameDetails)
+            } else {
+                MemoryCacheManager.shared.append(value: "\(game.id)", forList: .favoriteGames)
+                
+                DiskCacheManager.shared.add(game, for: "\(game.id)", to: .favoriteGames)
+                DiskCacheManager.shared.add(gameDetails, for: gameDetails.detailCacheId, to: .favoriteGameDetails)
+            }
         }
         
         delegate?.favoriteUpdated()

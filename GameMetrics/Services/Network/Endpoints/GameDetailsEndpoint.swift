@@ -9,7 +9,7 @@ import Foundation
 import SENetworking
 
 struct GameDetailsRequest: Encodable {
-    let id: Int?
+    let id: Int
 }
 
 protocol GameDetailsRequesttProtocol {
@@ -18,8 +18,8 @@ protocol GameDetailsRequesttProtocol {
 
 extension APIEndpoints {
     
-    static func getGame(with GameDetailRequestDTO: GameDetailsRequest) -> Endpoint<GameDetailsModel> {
-        return Endpoint(path: "games/\(GameDetailRequestDTO.id!)",
+    static func getGame(with gameDetailRequestDTO: GameDetailsRequest) -> Endpoint<GameDetailsModel> {
+        return Endpoint(path: "games/\(gameDetailRequestDTO.id)",
                         method: .get)
     }
 }

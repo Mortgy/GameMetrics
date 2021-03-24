@@ -24,7 +24,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="eWa-aP-2x3">
                                 <rect key="frame" x="16" y="16" width="343" height="104"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vrl-i8-jeJ">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="vrl-i8-jeJ">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="104"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="vrl-i8-jeJ" secondAttribute="height" multiplier="120:104" id="Z3d-Bn-PP6"/>
@@ -102,6 +102,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="placeholder" width="1024" height="1024"/>
         <namedColor name="score_red">
             <color red="0.84700000286102295" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

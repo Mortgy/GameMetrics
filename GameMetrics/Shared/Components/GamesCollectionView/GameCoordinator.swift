@@ -30,8 +30,10 @@ class GameCoordinator: Coordinator, Alert {
         var actions = [UIAlertAction]()
         let action = UIAlertAction(title: "OK", style: .cancel)
         actions.append(action)
+        if let viewController = navigationController?.children.last as? (UIViewController & Alert) {
+            showAlert(from: viewController, title: title, message: message, actions: actions)
+        }
         
-        showAlert(from: navigationController?.children.last as! (UIViewController & Alert), title: title, message: message, actions: actions)
     }
     
 }

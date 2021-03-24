@@ -137,8 +137,8 @@ extension GamesCollectionView {
 // MARK: - Helpers
 extension GamesCollectionView {
     func itemSize() -> CGSize {
-        var itemWidth: CGFloat!
-        var itemHeight: CGFloat!
+        var itemWidth: CGFloat
+        var itemHeight: CGFloat
         if deviceType() == .pad {
             if deviceOrientation().isLandscape {
                 itemWidth = self.frame.width / 3

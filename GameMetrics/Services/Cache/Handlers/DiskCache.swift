@@ -11,10 +11,7 @@ class DiskCacheManager : Cache {
     
     static let shared = DiskCacheManager()
     
-    var cacheDirectory : URL {
-        let homeDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        return homeDirectory.appendingPathComponent("cache")
-    }
+    var cacheDirectory : URL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("cache"))!
     
     init() {
         createDirectory(at: cacheDirectory.absoluteString)
@@ -114,8 +111,11 @@ extension DiskCacheManager {
     }
     
     func createDirectory(at path: String) {
-        if !FileManager.default.fileExists(atPath: URL(string: path)!.path) {
-            try? FileManager.default.createDirectory(at: URL(string: path)!, withIntermediateDirectories: false, attributes: nil)
+        if let url = URL(string: path) {
+            if !FileManager.default.fileExists(atPath: url.path) {
+                try? FileManager.default.createDirectory(at: URL(string: path)!, withIntermediateDirectories: false, attributes: nil)
+            }
         }
+        
     }
 }

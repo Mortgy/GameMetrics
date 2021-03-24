@@ -65,8 +65,8 @@ class HomeViewModel: GamesCollectionViewModel, GamesRequestProtocol {
             
             self?.networkRequest = request?.0
             
-            if let tempCache = request?.1 {
-                self?.fetchedData.append(contentsOf: tempCache.results!)
+            if let tempCache = request?.1, let results = tempCache.results {
+                self?.fetchedData.append(contentsOf: results)
                 self?.loadMore = tempCache.next != nil ? true : false
                 
                 DispatchQueue.main.async { [weak self] in

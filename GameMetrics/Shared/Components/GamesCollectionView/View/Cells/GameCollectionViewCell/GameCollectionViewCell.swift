@@ -20,6 +20,7 @@ class GameCollectionViewCell: UICollectionViewCell {
     }
 
     func setup(with viewModel: GameCellViewModel) {
+        gameImageView.image = UIImage(named: "placeholder")
         if let imageUrl = viewModel.imageURL {
             gameImageView.load(url: imageUrl)
         } else {
