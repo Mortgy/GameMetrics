@@ -11,6 +11,7 @@
 		501DF829260A8B0600AD5EAA /* ApiServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501DF828260A8B0600AD5EAA /* ApiServices.swift */; };
 		501DF82F260B1E2D00AD5EAA /* MockApiServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501DF82E260B1E2D00AD5EAA /* MockApiServices.swift */; };
 		501DF847260B455600AD5EAA /* SafariHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501DF846260B455600AD5EAA /* SafariHandler.swift */; };
+		501DF872260B8BBC00AD5EAA /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 501DF871260B8BBC00AD5EAA /* SDWebImage */; };
 		5035DB56260286B40033AFCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5035DB55260286B40033AFCF /* AppDelegate.swift */; };
 		5035DB5F260286B60033AFCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5035DB5E260286B60033AFCF /* Assets.xcassets */; };
 		5035DB62260286B60033AFCF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5035DB60260286B60033AFCF /* LaunchScreen.storyboard */; };
@@ -152,6 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				501DF872260B8BBC00AD5EAA /* SDWebImage in Frameworks */,
 				5035DC272604F2690033AFCF /* SENetworking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -568,6 +570,7 @@
 			name = GameMetrics;
 			packageProductDependencies = (
 				5035DC262604F2690033AFCF /* SENetworking */,
+				501DF871260B8BBC00AD5EAA /* SDWebImage */,
 			);
 			productName = GameMetrics;
 			productReference = 5035DB52260286B40033AFCF /* GameMetrics.app */;
@@ -642,6 +645,7 @@
 			mainGroup = 5035DB49260286B40033AFCF;
 			packageReferences = (
 				5035DC252604F2690033AFCF /* XCRemoteSwiftPackageReference "SENetworking" */,
+				501DF870260B8BBC00AD5EAA /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 5035DB53260286B40033AFCF /* Products */;
 			projectDirPath = "";
@@ -1197,6 +1201,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		501DF870260B8BBC00AD5EAA /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.4;
+			};
+		};
 		5035DC252604F2690033AFCF /* XCRemoteSwiftPackageReference "SENetworking" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kudoleh/SENetworking";
@@ -1208,6 +1220,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		501DF871260B8BBC00AD5EAA /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 501DF870260B8BBC00AD5EAA /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
 		5035DC262604F2690033AFCF /* SENetworking */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5035DC252604F2690033AFCF /* XCRemoteSwiftPackageReference "SENetworking" */;

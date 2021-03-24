@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class GameCollectionViewCell: UICollectionViewCell {
 
@@ -20,11 +21,13 @@ class GameCollectionViewCell: UICollectionViewCell {
     }
 
     func setup(with viewModel: GameCellViewModel) {
-        gameImageView.image = UIImage(named: "placeholder")
-        if let imageUrl = viewModel.imageURL {
-            gameImageView.load(url: imageUrl)
-        } else {
-            gameImageView.image = UIImage(named: "placeholder")
+        
+        gameImageView.sd_setImage(with: viewModel.imageURL, placeholderImage: nil, options: .waitStoreCache) { [weak self] (image, error, cacheType, url) in
+            
+            UIView.animate(withDuration: 0.3) {
+                self?.gameImageView.alpha = 1
+            }
+
         }
         
         gameTitleLabel.text = viewModel.name
