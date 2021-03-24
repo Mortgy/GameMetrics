@@ -97,10 +97,12 @@ extension DetailViewController {
     func setupUI() {
         gameTitleLabel.text = detailViewModel.name
         
-        if let imageUrl = detailViewModel.imageURL {
-            gameImageView.load(url: imageUrl)
-        } else {
-            gameImageView.image = UIImage(named: "placeholder")
+        gameImageView.sd_setImage(with: detailViewModel.imageURL, placeholderImage: nil, options: .waitStoreCache) { [weak self] (image, error, cacheType, url) in
+            
+            UIView.animate(withDuration: 0.3) {
+                self?.gameImageView.alpha = 1
+            }
+
         }
         
         gameDescriptionLabel.text = detailViewModel.descripton
