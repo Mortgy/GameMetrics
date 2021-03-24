@@ -50,7 +50,7 @@ class HomeViewModel: GamesCollectionViewModel, GamesRequestProtocol {
                 }
                 
                 
-                loadFromCache ? self?.fetchedData.removeAll() :
+                loadFromCache ? self?.fetchedData.removeAll() : nil
                     
                 self?.fetchedData.append(contentsOf: games)
                 self?.loadMore = result.next != nil ? true : false

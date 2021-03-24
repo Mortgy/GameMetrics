@@ -12,8 +12,8 @@ protocol ApiServicesProtocol {
     
     func getGames(gamesRequest: GamesRequest, from cache: Bool, success: @escaping (GameResponseModel) -> Void, fail: @escaping (String) -> Void) -> (NetworkCancellable?, GameResponseModel?)
     func getGameDetails(gameDetailRequest: GameDetailsRequest,
-                          success: @escaping (GameDetailsModel) -> Void,
-                          fail: @escaping (String) -> Void) -> NetworkCancellable?
+                        success: @escaping (GameDetailsModel) -> Void,
+                        fail: @escaping (String) -> Void) -> NetworkCancellable?
     func gamesOfflineFirst(cacheName: String) -> GameResponseModel?
     
 }
@@ -32,15 +32,15 @@ class ApiServices: ApiServicesProtocol {
                 return
             }
             
-            cache ? DiskCacheManager.shared.add(response, for: cacheName, to: .backend) :
+            cache ? DiskCacheManager.shared.add(response, for: cacheName, to: .backend) : nil
             success(response)
             
         }, cache ? gamesOfflineFirst(cacheName: cacheName) : nil)
     }
     
     func getGameDetails(gameDetailRequest: GameDetailsRequest,
-                          success: @escaping (GameDetailsModel) -> Void,
-                          fail: @escaping (String) -> Void) -> NetworkCancellable? {
+                        success: @escaping (GameDetailsModel) -> Void,
+                        fail: @escaping (String) -> Void) -> NetworkCancellable? {
         
         if DiskCacheManager.shared.valueExists("detailCacheId\(gameDetailRequest.id!)", in: .favoriteGameDetails) {
             if let gameDetails: GameDetailsModel = DiskCacheManager.shared.value("detailCacheId\(gameDetailRequest.id!)", from: .favoriteGameDetails) {
