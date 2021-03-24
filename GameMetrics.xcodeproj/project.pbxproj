@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		501DF821260A715C00AD5EAA /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501DF820260A715C00AD5EAA /* Alert.swift */; };
 		501DF829260A8B0600AD5EAA /* ApiServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501DF828260A8B0600AD5EAA /* ApiServices.swift */; };
+		501DF82F260B1E2D00AD5EAA /* MockApiServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501DF82E260B1E2D00AD5EAA /* MockApiServices.swift */; };
 		5035DB56260286B40033AFCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5035DB55260286B40033AFCF /* AppDelegate.swift */; };
 		5035DB5F260286B60033AFCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5035DB5E260286B60033AFCF /* Assets.xcassets */; };
 		5035DB62260286B60033AFCF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5035DB60260286B60033AFCF /* LaunchScreen.storyboard */; };
@@ -86,6 +87,7 @@
 /* Begin PBXFileReference section */
 		501DF820260A715C00AD5EAA /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		501DF828260A8B0600AD5EAA /* ApiServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServices.swift; sourceTree = "<group>"; };
+		501DF82E260B1E2D00AD5EAA /* MockApiServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApiServices.swift; sourceTree = "<group>"; };
 		5035DB52260286B40033AFCF /* GameMetrics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameMetrics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5035DB55260286B40033AFCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5035DB5E260286B60033AFCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 		5035DB6B260286B70033AFCF /* GameMetricsTests */ = {
 			isa = PBXGroup;
 			children = (
+				501DF82E260B1E2D00AD5EAA /* MockApiServices.swift */,
 				504E7C3F260935C300492658 /* ViewModels */,
 				504E7C2D26092B9600492658 /* CacheManager */,
 				5035DB6C260286B70033AFCF /* GameMetricsTests.swift */,
@@ -728,6 +731,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				504E7C19260924D300492658 /* MemoryCache.swift in Sources */,
+				501DF82F260B1E2D00AD5EAA /* MockApiServices.swift in Sources */,
 				5035DB6D260286B70033AFCF /* GameMetricsTests.swift in Sources */,
 				504E7C2926092B9200492658 /* MemoryCacheManagerTests.swift in Sources */,
 				504E7C4E260936AA00492658 /* DetailsViewModelTests.swift in Sources */,

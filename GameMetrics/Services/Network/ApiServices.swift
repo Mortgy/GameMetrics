@@ -23,8 +23,7 @@ class ApiServices: ApiServicesProtocol {
         
         let endpoint = APIEndpoints.getGames(with: gamesRequest)
         let cacheName = (endpoint.path + "\(gamesRequest.page)").MD5()
-        
-        return (DIContainer.shared.apiDataTransferService.request(with: endpoint) { result in
+        let networkRequest = DIContainer.shared.apiDataTransferService.request(with: endpoint) { result in
             
             guard case let .success(response) = result else {
                 
@@ -35,7 +34,9 @@ class ApiServices: ApiServicesProtocol {
             cache ? DiskCacheManager.shared.add(response, for: cacheName, to: .backend) : nil
             success(response)
             
-        }, cache ? gamesOfflineFirst(cacheName: cacheName) : nil)
+        }
+        
+        return (networkRequest, cache ? gamesOfflineFirst(cacheName: cacheName) : nil)
     }
     
     func getGameDetails(gameDetailRequest: GameDetailsRequest,

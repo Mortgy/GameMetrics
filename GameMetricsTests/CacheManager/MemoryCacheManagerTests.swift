@@ -13,7 +13,7 @@ class MemoryCacheManagerTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         MemoryCacheManager.shared.pop(value: "test", forList: .seen)
-
+        
     }
     
     func testPop() throws {
@@ -43,17 +43,17 @@ class MemoryCacheManagerTests: XCTestCase {
         XCTAssertEqual(testCache.count, 2, "Array count is 2")
         XCTAssertGreaterThan(testCache.count, 1, "Array count greater than 1")
         XCTAssertLessThan(testCache.count, 3, "Array count less than 3")
-
+        
     }
     
     func testValueExists() throws {
-
+        
         MemoryCacheManager.shared.append(value: "test", forList: .seen)
         let valueExists = MemoryCacheManager().valueExists(value: "test", in: .seen)
         XCTAssertTrue(valueExists, "test value exists")
-
+        
     }
-
+    
     func testAddAndValue() throws {
         
         MemoryCacheManager.shared.add("test", for: "key", to: nil)
